@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- The <!DOCTYPE html> declaration tells the browser this is an HTML5 document. It must be the very first line. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Fundamentals</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <!-- <header> holds intro content for the page or a section, like a title/logo -->
+    <header>
+        <h1>HTML5 Fundamentals</h1>
+        <p>A one-page demo of the basics every web page starts with.</p>
+    </header>
+
+    <!-- ============ NAV ============ -->
+    <!-- <nav> holds the main navigation links of the page -->
+    <nav>
+        <a href="#formatting">Text Formatting</a>
+        <a href="#lists">Lists</a>
+        <a href="#links">Links</a>
+        <a href="#images">Images</a>
+        <a href="#tables">Tables</a>
+    </nav>
+
+    <!-- ============ MAIN ============ -->
+    <!-- <main> wraps the primary content of the page (only one per page) -->
+    <main>
+
+        <!-- ============ ARTICLE ============ -->
+        <!-- <article> is content that could stand alone, like a blog post or lesson -->
+        <article>
+            <h2>Lesson: Getting to Know HTML5</h2>
+            <p>
+                Everything below is one HTML page split into
+                <strong>sections</strong> so you can see how each element is used.
+            </p>
+
+            <!-- ============ TEXT FORMATTING ============ -->
+            <section id="formatting">
+                <h2>1. Text Formatting</h2>
+                <p>This is a normal paragraph.</p>
+                <p><strong>Bold text</strong> shows importance.</p>
+                <p><em>Italic text</em> shows emphasis.</p>
+                <p><u>Underlined text</u> and <mark>highlighted text</mark>.</p>
+                <p>Water is H<sub>2</sub>O and 5<sup>2</sup> = 25.</p>
+                <blockquote>
+                    "This is a blockquote — used for quoting someone else's text."
+                </blockquote>
+                <hr>
+            </section>
+
+            <!-- ============ LISTS ============ -->
+            <section id="lists">
+                <h2>2. Lists</h2>
+
+                <h3>Unordered List</h3>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+
+                <h3>Ordered List</h3>
+                <ol>
+                    <li>Write the HTML</li>
+                    <li>Style it with CSS</li>
+                    <li>Add behavior with JavaScript</li>
+                </ol>
+
+                <h3>Description List</h3>
+                <dl>
+                    <dt>HTML</dt>
+                    <dd>Structures the content of a web page.</dd>
+                    <dt>CSS</dt>
+                    <dd>Styles the appearance of a web page.</dd>
+                </dl>
+            </section>
+
+            <!-- ============ LINKS ============ -->
+            <section id="links">
+                <h2>3. Links</h2>
+                <p>
+                    A link to another site:
+                    <a href="https://www.w3schools.com/html/" target="_blank">Learn more on W3Schools</a>
+                </p>
+                <p>
+                    A link to jump within this same page:
+                    <a href="#formatting">Back to Text Formatting</a>
+                </p>
+                <p>
+                    A link to send an email:
+                    <a href="mailto:teacher@example.com">Email the teacher</a>
+                </p>
+            </section>
+
+            <!-- ============ IMAGES ============ -->
+            <section id="images">
+                <h2>4. Images</h2>
+                <p>The <code>alt</code> text describes the image if it can't load.</p>
+                <img src="https://via.placeholder.com/200x150" alt="Placeholder example image">
+            </section>
+
+            <!-- ============ TABLES ============ -->
+            <section id="tables">
+                <h2>5. Tables</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Subject</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan Dela Cruz</td>
+                            <td>Web Development</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>Maria Santos</td>
+                            <td>Web Development</td>
+                            <td>92</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <!-- <footer> holds closing info like copyright or contact details -->
+    <footer>
+        <p>&copy; 2026 HTML5 Fundamentals Lesson. Made for learning purposes.</p>
+    </footer>
+
+</body>
+</html>

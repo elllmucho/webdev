@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Fundamentals</title>
+    <link rel="stylesheet" href="lesson-style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <p class="eyebrow">Internet Programming and Web Development</p>
+        <h1>HTML5 Fundamentals</h1>
+        <p>Document Structure · Semantic Elements · Text · Lists · Links · Images · Tables</p>
+    </header>
+
+    <nav class="site-nav">
+        <a href="#objectives">Objectives</a>
+        <a href="#structure">Document Structure</a>
+        <a href="#semantic">Semantic Elements</a>
+        <a href="#text">Text Formatting</a>
+        <a href="#lists">Lists</a>
+        <a href="#links-images">Links &amp; Images</a>
+        <a href="#tables">Tables</a>
+        <a href="#lab">Lab Activity</a>
+        <a href="#takeaways">Key Takeaways</a>
+    </nav>
+
+    <main>
+
+        <!-- ============ LEARNING OBJECTIVES ============ -->
+        <section class="lesson" id="objectives">
+            <h2>Learning Objectives</h2>
+            <p class="subtitle">By the end of this session, students will be able to:</p>
+
+            <div class="lo-list">
+                <div class="lo-item">
+                    <span class="lo-badge">LO1</span>
+                    <span>Write a valid HTML5 document with correct DOCTYPE, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> structure.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">LO2</span>
+                    <span>Apply HTML5 semantic elements to give meaningful structure to a webpage.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">LO3</span>
+                    <span>Use text formatting tags — headings (h1–h6), paragraphs, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">LO4</span>
+                    <span>Create ordered, unordered, and description lists using correct HTML syntax.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">LO5</span>
+                    <span>Insert hyperlinks and images using <code>&lt;a&gt;</code> and <code>&lt;img&gt;</code> with proper attributes.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">LO6</span>
+                    <span>Build structured HTML tables with <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, <code>colspan</code>, and <code>rowspan</code>.</span>
+                </div>
+            </div>
+
+            <p class="subtitle" style="margin-top:16px;">Aligned to: CO2 &nbsp;·&nbsp; PO1, PO2</p>
+        </section>
+
+        <!-- ============ DOCUMENT STRUCTURE ============ -->
+        <section class="lesson" id="structure">
+            <h2>HTML5 Document Structure</h2>
+            <p class="subtitle">The required skeleton of every HTML5 webpage</p>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+    <p>This is the visible content inside the body.</p>
+  </body>
+</html></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <table class="ref">
+                <tr>
+                    <th><code>DOCTYPE</code></th>
+                    <td><code>&lt;!DOCTYPE html&gt;</code> — Tells the browser this is an HTML5 document. Must be the <strong>very first line</strong> — before <code>&lt;html&gt;</code>.</td>
+                </tr>
+                <tr>
+                    <th><code>&lt;html&gt;</code></th>
+                    <td><code>lang="en"</code> attribute — Root element wrapping the entire page. <code>lang</code> helps search engines &amp; screen readers.</td>
+                </tr>
+                <tr>
+                    <th><code>&lt;head&gt;</code></th>
+                    <td>Metadata container — Contains info <strong>about</strong> the page, not visible. Holds <code>&lt;title&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;style&gt;</code>.</td>
+                </tr>
+                <tr>
+                    <th><code>&lt;meta&gt;</code></th>
+                    <td><code>charset</code> &amp; <code>viewport</code> — <code>charset="UTF-8"</code> supports all characters; <code>viewport</code> ensures mobile-responsive display.</td>
+                </tr>
+                <tr>
+                    <th><code>&lt;body&gt;</code></th>
+                    <td>Visible content area — Everything users <strong>see</strong> goes inside <code>&lt;body&gt;</code>: text, images, tables, links.</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ============ SEMANTIC ELEMENTS ============ -->
+        <section class="lesson" id="semantic">
+            <h2>HTML5 Semantic Elements</h2>
+            <p class="subtitle">Two pages can look identical in a browser — semantic HTML tells machines what each part means</p>
+
+            <div class="callout key">
+                <strong>Key insight:</strong> Semantic elements describe <em>meaning</em>, not just appearance. A <code>&lt;div&gt;</code> could hold anything; a <code>&lt;nav&gt;</code> always means navigation.
+            </div>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  header, nav, footer { color: #fff; padding: 12px; text-align: center; }
+  header { background: #2c5f9b; }
+  nav { background: #3f7ab0; padding: 8px; }
+  nav a { color: #fff; margin: 0 10px; }
+  .layout { display: flex; }
+  main { flex: 3; background: #eef2f7; padding: 14px; }
+  aside { flex: 1; background: #dde3ea; padding: 14px; }
+  footer { background: #1b2a41; }
+</style>
+
+<header>
+  <h1>My Website</h1>
+</header>
+
+<nav>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Contact</a>
+</nav>
+
+<div class="layout">
+  <main>
+    <section>
+      <h2>Main Content</h2>
+      <p>This is the primary content of the page — only ONE main per page.</p>
+    </section>
+  </main>
+  <aside>
+    <h3>Related Links</h3>
+    <p>Sidebar: related links, ads, tips.</p>
+  </aside>
+</div>
+
+<footer>
+  <p>&copy; 2026 My Website</p>
+</footer></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <table class="ref">
+                <tr><th><code>&lt;header&gt;</code></th><td>Top of page/section. Contains <code>&lt;h1&gt;</code>, logo, tagline.</td></tr>
+                <tr><th><code>&lt;nav&gt;</code></th><td>Site navigation links. Usually contains a <code>&lt;ul&gt;</code> of <code>&lt;a&gt;</code> tags.</td></tr>
+                <tr><th><code>&lt;main&gt;</code></th><td>ONE per page. The dominant, unique page content.</td></tr>
+                <tr><th><code>&lt;article&gt;</code></th><td>Self-contained content (blog post, news item, product card).</td></tr>
+                <tr><th><code>&lt;section&gt;</code></th><td>Thematic grouping — should have its own heading.</td></tr>
+                <tr><th><code>&lt;aside&gt;</code></th><td>Supplementary content: sidebar, related links, ads.</td></tr>
+                <tr><th><code>&lt;footer&gt;</code></th><td>Bottom of page/section. Copyright, links, contact.</td></tr>
+            </table>
+        </section>
+
+        <!-- ============ TEXT FORMATTING ============ -->
+        <section class="lesson" id="text">
+            <h2>Text Formatting &amp; Headings</h2>
+            <p class="subtitle">Structure and emphasize content with HTML5 text elements</p>
+
+            <h3>Heading hierarchy (h1–h6)</h3>
+            <div class="demo-box heading-demo">
+                <div style="font-size:2rem; font-weight:700;">Heading 1 <span class="tag">&lt;h1&gt; · Page Title, ONE per page, highest SEO weight</span></div>
+                <div style="font-size:1.5rem; font-weight:700;">Heading 2 <span class="tag">&lt;h2&gt; · Section headings</span></div>
+                <div style="font-size:1.2rem; font-weight:700;">Heading 3 <span class="tag">&lt;h3&gt; · Sub-section headings</span></div>
+                <div style="font-size:1rem; font-weight:700;">Heading 4 <span class="tag">&lt;h4&gt; · Sub-sub-sections</span></div>
+                <div style="font-size:0.85rem; font-weight:700;">Heading 5 <span class="tag">&lt;h5&gt; · Rarely used in practice</span></div>
+                <div style="font-size:0.75rem; font-weight:700;">Heading 6 <span class="tag">&lt;h6&gt; · Lowest level</span></div>
+            </div>
+
+            <h3>Inline text elements</h3>
+            <table class="ref">
+                <tr><th><code>&lt;strong&gt;</code></th><td><strong>Bold + semantic importance</strong> (screen readers announce it)</td></tr>
+                <tr><th><code>&lt;em&gt;</code></th><td><em>Italic + semantic emphasis</em></td></tr>
+                <tr><th><code>&lt;b&gt;</code></th><td><b>Bold</b> — visual only, no semantic meaning</td></tr>
+                <tr><th><code>&lt;i&gt;</code></th><td><i>Italic</i> — visual only (technical terms, foreign words)</td></tr>
+                <tr><th><code>&lt;br&gt;</code></th><td>Line break — self-closing, forces a new line within a paragraph</td></tr>
+                <tr><th><code>&lt;hr&gt;</code></th><td>Horizontal rule — thematic break between content blocks</td></tr>
+                <tr><th><code>&lt;small&gt;</code></th><td><small>Smaller text</small> — fine print, disclaimers</td></tr>
+                <tr><th><code>&lt;mark&gt;</code></th><td><mark>Highlighted text</mark> — like a yellow marker</td></tr>
+                <tr><th><code>&lt;del&gt;</code></th><td><del>Strikethrough</del> — deleted/removed content</td></tr>
+                <tr><th><code>&lt;sup&gt;/&lt;sub&gt;</code></th><td>Superscript / Subscript — e.g. H<sub>2</sub>O, x<sup>2</sup> — footnotes, chemical formulas</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><h2>About Me</h2>
+<p>My name is <strong>Juan Dela Cruz</strong> and I am learning <em>HTML5</em>.</p>
+<p>Water is H<sub>2</sub>O and 5<sup>2</sup> = 25.</p>
+<p>This is <mark>highlighted text</mark> and this is <del>removed text</del>.</p>
+<hr>
+<p><small>Last updated: 2026</small></p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <strong>Best practice:</strong> Use <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> for meaningful emphasis. Use <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> only for visual styling with no semantic significance.
+            </div>
+        </section>
+
+        <!-- ============ LISTS ============ -->
+        <section class="lesson" id="lists">
+            <h2>HTML5 Lists</h2>
+            <p class="subtitle">Three list types for organizing content</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3 style="margin-top:0;">&lt;ul&gt; — Unordered List</h3>
+                    <p>Bulleted list — order does <strong>not</strong> matter</p>
+                    <div class="tryit compact">
+                        <div class="tryit-toolbar">
+                            <span class="tryit-title">Try it »</span>
+                            <div class="tryit-buttons">
+                                <button type="button" class="tryit-run">Run ▶</button>
+                                <button type="button" class="tryit-reset">Reset</button>
+                            </div>
+                        </div>
+                        <div class="tryit-body">
+                            <textarea class="tryit-code" spellcheck="false"><ul>
+  <li>Python</li>
+  <li>HTML</li>
+  <li>CSS</li>
+</ul></textarea>
+                            <div class="tryit-result">
+                                <div class="tryit-result-label">Result</div>
+                                <iframe class="tryit-frame" title="Live result"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <p>✔ Use for: shopping lists, features, hobbies, options</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0;">&lt;ol&gt; — Ordered List</h3>
+                    <p>Numbered list — order <strong>matters</strong></p>
+                    <div class="tryit compact">
+                        <div class="tryit-toolbar">
+                            <span class="tryit-title">Try it »</span>
+                            <div class="tryit-buttons">
+                                <button type="button" class="tryit-run">Run ▶</button>
+                                <button type="button" class="tryit-reset">Reset</button>
+                            </div>
+                        </div>
+                        <div class="tryit-body">
+                            <textarea class="tryit-code" spellcheck="false"><ol>
+  <li>Open VS Code</li>
+  <li>Create file</li>
+  <li>Write code</li>
+</ol></textarea>
+                            <div class="tryit-result">
+                                <div class="tryit-result-label">Result</div>
+                                <iframe class="tryit-frame" title="Live result"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <p>✔ Use for: steps, rankings, procedures, instructions</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0;">&lt;dl&gt; — Description List</h3>
+                    <p>Term + definition pairs</p>
+                    <div class="tryit compact">
+                        <div class="tryit-toolbar">
+                            <span class="tryit-title">Try it »</span>
+                            <div class="tryit-buttons">
+                                <button type="button" class="tryit-run">Run ▶</button>
+                                <button type="button" class="tryit-reset">Reset</button>
+                            </div>
+                        </div>
+                        <div class="tryit-body">
+                            <textarea class="tryit-code" spellcheck="false"><dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+</dl></textarea>
+                            <div class="tryit-result">
+                                <div class="tryit-result-label">Result</div>
+                                <iframe class="tryit-frame" title="Live result"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <p>✔ Use for: glossaries, metadata, FAQs, dictionaries</p>
+                </div>
+            </div>
+
+            <div class="callout">
+                🔁 <strong>Nested lists:</strong> Place a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> inside a <code>&lt;li&gt;</code> to create sub-items. Browsers auto-indent nested lists.
+                The <code>type</code> attribute on <code>&lt;ol&gt;</code> changes numbering: <code>type="1"</code> (default) · <code>type="A"</code> · <code>type="a"</code> · <code>type="I"</code> · <code>type="i"</code>
+            </div>
+        </section>
+
+        <!-- ============ LINKS & IMAGES ============ -->
+        <section class="lesson" id="links-images">
+            <h2>Links &amp; Images</h2>
+            <p class="subtitle">Connecting pages and embedding visuals with &lt;a&gt; and &lt;img&gt;</p>
+
+            <h3>🔗 Hyperlinks — &lt;a&gt; tag</h3>
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><a href="https://www.google.com"
+   target="_blank"
+   rel="noopener"
+   title="Go to Google">
+  Visit Google
+</a>
+
+<p><a href="mailto:student@email.com">Email Me</a></p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+            <table class="ref">
+                <tr><th><code>href</code></th><td>Destination URL. Can be absolute or relative.</td></tr>
+                <tr><th><code>target</code></th><td><code>_blank</code> = new tab &nbsp;|&nbsp; <code>_self</code> = same tab (default)</td></tr>
+                <tr><th><code>rel</code></th><td><code>noopener noreferrer</code> — security best practice for <code>target="_blank"</code> links</td></tr>
+                <tr><th><code>title</code></th><td>Tooltip text shown on hover</td></tr>
+                <tr><th><code>mailto:</code></th><td><code>&lt;a href="mailto:you@email.com"&gt;</code> — email link</td></tr>
+                <tr><th><code>tel:</code></th><td><code>&lt;a href="tel:+631234567"&gt;</code> — phone link</td></tr>
+            </table>
+
+            <h3>🖼️ Images — &lt;img&gt; tag</h3>
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><img src="https://picsum.photos/300/200"
+     alt="Random placeholder photo"
+     width="300"
+     height="200"
+     loading="lazy"></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+            <table class="ref">
+                <tr><th><code>src</code></th><td>Path or URL to the image file (<strong>required</strong>)</td></tr>
+                <tr><th><code>alt</code></th><td>Alternative text — <strong>required</strong> for accessibility &amp; SEO</td></tr>
+                <tr><th><code>width</code>/<code>height</code></th><td>Hints the browser about dimensions (prevents layout shift)</td></tr>
+                <tr><th><code>loading</code></th><td><code>lazy</code> = load only when visible (improves performance)</td></tr>
+            </table>
+
+            <div class="callout">
+                📍 <strong>URL types:</strong><br>
+                Absolute: <code>https://www.google.com</code> (full address, external sites)<br>
+                Relative: <code>images/photo.jpg</code> (relative to current file, internal links)
+            </div>
+        </section>
+
+        <!-- ============ TABLES ============ -->
+        <section class="lesson" id="tables">
+            <h2>HTML5 Tables</h2>
+            <p class="subtitle">Structured data: &lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, colspan &amp; rowspan</p>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #999; padding: 8px; }
+</style>
+
+<table>
+  <caption>Class Schedule</caption>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Subject</th>
+      <th colspan="2">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2">Mon</td>
+      <td>HTML5 Lab</td>
+      <td>8:00 AM</td>
+      <td>11:00 AM</td>
+    </tr>
+    <tr>
+      <td>IT Math</td>
+      <td>1:00 PM</td>
+      <td>4:00 PM</td>
+    </tr>
+    <tr>
+      <td>Tue</td>
+      <td>Web Dev</td>
+      <td>7:30 AM</td>
+      <td>10:30 AM</td>
+    </tr>
+    <tr>
+      <td>Wed</td>
+      <td>Databases</td>
+      <td>8:00 AM</td>
+      <td>11:00 AM</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">4 class sessions this week</td>
+    </tr>
+  </tfoot>
+</table></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <table class="ref">
+                <tr><th><code>&lt;table&gt;</code></th><td>Container for the entire table</td></tr>
+                <tr><th><code>&lt;caption&gt;</code></th><td>Table title — placed inside <code>&lt;table&gt;</code>, above rows</td></tr>
+                <tr><th><code>&lt;thead&gt;</code></th><td>Groups header rows — for screen readers &amp; CSS targeting</td></tr>
+                <tr><th><code>&lt;tbody&gt;</code></th><td>Groups data rows — the main table body</td></tr>
+                <tr><th><code>&lt;tfoot&gt;</code></th><td>Groups footer rows — totals, summaries</td></tr>
+                <tr><th><code>&lt;tr&gt;</code></th><td>Table row — contains <code>&lt;th&gt;</code> or <code>&lt;td&gt;</code> cells</td></tr>
+                <tr><th><code>&lt;th&gt;</code></th><td>Header cell — bold, centered by default</td></tr>
+                <tr><th><code>&lt;td&gt;</code></th><td>Data cell — standard table cell</td></tr>
+                <tr><th><code>colspan="N"</code></th><td>Merge N cells horizontally</td></tr>
+                <tr><th><code>rowspan="N"</code></th><td>Merge N cells vertically</td></tr>
+            </table>
+        </section>
+
+        <!-- ============ LAB ACTIVITY ============ -->
+        <section class="lesson" id="lab">
+            <h2>Laboratory Activity</h2>
+            <p class="subtitle">My Digital Profile Page &nbsp;·&nbsp; 45 minutes &nbsp;·&nbsp; 50 points</p>
+
+            <div class="callout key">
+                🖥️ <strong>Task:</strong> Build a personal HTML5 profile page (<code>profile.html</code>) using ALL elements learned today.
+            </div>
+
+            <table class="ref rubric">
+                <tr><th>R1 · 5 pts</th><td><strong>HTML5 Document Shell</strong> — Correct DOCTYPE, <code>&lt;html lang&gt;</code>, <code>&lt;head&gt;</code> with charset &amp; viewport meta, <code>&lt;body&gt;</code></td></tr>
+                <tr><th>R2 · 10 pts</th><td><strong>Semantic Structure</strong> — <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, at least one <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code> — 5+ semantic elements</td></tr>
+                <tr><th>R3 · 8 pts</th><td><strong>Heading &amp; Biography</strong> — <code>&lt;h1&gt;</code> your name, <code>&lt;h2&gt;</code> sections, <code>&lt;p&gt;</code> bio with <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code></td></tr>
+                <tr><th>R4 · 7 pts</th><td><strong>Two Lists</strong> — <code>&lt;ul&gt;</code> of 5 hobbies/interests + <code>&lt;ol&gt;</code> of your top 3 goals</td></tr>
+                <tr><th>R5 · 5 pts</th><td><strong>Hyperlinks</strong> — External link (<code>target="_blank"</code> + <code>rel="noopener"</code>) + <code>mailto:</code> link</td></tr>
+                <tr><th>R6 · 5 pts</th><td><strong>Image</strong> — <code>&lt;img&gt;</code> with <code>src</code> and descriptive <code>alt</code> attribute (use picsum.photos if no photo)</td></tr>
+                <tr><th>R7 · 8 pts</th><td><strong>Class Schedule Table</strong> — <code>&lt;table&gt;</code> with caption, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>, <code>colspan</code> used at least once</td></tr>
+                <tr><th>R8 · 2 pts</th><td><strong>Footer</strong> — <code>&lt;footer&gt;</code> with <code>&amp;copy;</code> HTML entity, your name, and year</td></tr>
+            </table>
+
+            <div class="callout tip">
+                💡 Validate your code at <a href="https://validator.w3.org" target="_blank" rel="noopener">validator.w3.org</a> &nbsp;·&nbsp; 📁 Save as <code>profile.html</code> &nbsp;·&nbsp; <strong>Total: 50 points</strong>
+            </div>
+        </section>
+
+        <!-- ============ KEY TAKEAWAYS ============ -->
+        <section class="lesson" id="takeaways">
+            <h2>Key Takeaways</h2>
+            <p class="subtitle">HTML5 Fundamentals: Document Structure · Semantic Elements · Text · Lists · Links · Images · Tables</p>
+
+            <ol class="takeaways">
+                <li>Every HTML5 page starts with <code>&lt;!DOCTYPE html&gt;</code> followed by <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>.</li>
+                <li>Semantic elements (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>) give meaning to structure — not just visual layout.</li>
+                <li>Use <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> for meaningful emphasis; use <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> only for visual styling.</li>
+                <li>HTML has three list types: <code>&lt;ul&gt;</code> (unordered/bullets), <code>&lt;ol&gt;</code> (ordered/numbered), <code>&lt;dl&gt;</code> (description/glossary).</li>
+                <li>Always add <code>alt</code> text to images. Always add <code>rel="noopener"</code> when using <code>target="_blank"</code> on links.</li>
+                <li>HTML tables use <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> for structure; <code>colspan</code> and <code>rowspan</code> merge cells.</li>
+                <li>Validate your HTML at <a href="https://validator.w3.org" target="_blank" rel="noopener">validator.w3.org</a> to catch errors before they reach the browser.</li>
+            </ol>
+        </section>
+
+    </main>
+
+    <div class="next-week">
+        <p class="eyebrow">▶ Next Week</p>
+        <h3>Week 4: HTML5 Advanced</h3>
+        <p>Forms, Input Types, Validation, Multimedia (Audio, Video, Canvas), ARIA &amp; Accessibility</p>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Internet Programming and Web Development — HTML5 Fundamentals Lesson Site</p>
+    </footer>
+
+</body>
+</html>
