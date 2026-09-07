@@ -593,15 +593,19 @@
                     </div>
                 </div>
                 <div class="tryit-body">
-                    <textarea class="tryit-code" spellcheck="false"><form>
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  label { display: inline-block; width: 90px; }
+</style>
+
+<form>
   <fieldset>
     <legend>Personal Info</legend>
 
-    <label for="fname">Full Name:</label>
-    <input type="text" id="fname" name="fname">
+    <p><label for="fname">Full Name:</label>
+    <input type="text" id="fname" name="fname"></p>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
+    <p><label for="email">Email:</label>
+    <input type="email" id="email" name="email"></p>
   </fieldset>
 
   <fieldset>
