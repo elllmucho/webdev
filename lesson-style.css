@@ -329,13 +329,6 @@ ol.takeaways li::before {
     margin: 40px 0;
     border-radius: var(--radius);
 }
-.week-divider .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    color: #b9cbe0;
-    margin-bottom: 6px;
-}
 .week-divider h2 {
     margin: 0 0 8px;
     color: #fff;
