@@ -435,6 +435,10 @@ ol.takeaways li::before {
 .tryit.compact .tryit-frame {
     min-height: 140px;
 }
+.tryit.tall .tryit-code,
+.tryit.tall .tryit-frame {
+    min-height: 560px;
+}
 
 @media (max-width: 640px) {
     .tryit-body {
