@@ -25,6 +25,15 @@
         <a href="#tables">Tables</a>
         <a href="#lab">Lab Activity</a>
         <a href="#takeaways">Key Takeaways</a>
+        <span class="nav-divider">Week 4</span>
+        <a href="#forms">Forms</a>
+        <a href="#input-types">Input Types</a>
+        <a href="#validation">Validation</a>
+        <a href="#form-elements">Form Elements</a>
+        <a href="#multimedia">Multimedia</a>
+        <a href="#accessibility">Accessibility</a>
+        <a href="#w4-lab">Contact Form Lab</a>
+        <a href="#w4-takeaways">Week 4 Summary</a>
     </nav>
 
     <main>
@@ -535,12 +544,406 @@
             </ol>
         </section>
 
+        <div class="week-divider">
+            <p class="eyebrow">Week 4</p>
+            <h2>HTML5 Advanced</h2>
+            <p>Forms &amp; Validation · Multimedia Elements · Accessibility &amp; ARIA</p>
+        </div>
+
+        <!-- ============ WEEK 4 LEARNING OBJECTIVES ============ -->
+        <section class="lesson" id="w4-objectives">
+            <h2>Learning Objectives</h2>
+            <p class="subtitle">By the end of this lesson, you can:</p>
+
+            <div class="lo-list">
+                <div class="lo-item">
+                    <span class="lo-badge">PI1</span>
+                    <span>Build complete HTML5 forms using appropriate input types for each field.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">PI2</span>
+                    <span>Apply validation attributes (<code>required</code>, <code>pattern</code>, <code>min</code>/<code>max</code>) without JavaScript.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">PI3</span>
+                    <span>Embed <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> multimedia elements with fallback content.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">PI4</span>
+                    <span>Explain the purpose of <code>&lt;canvas&gt;</code> and when JavaScript is required to use it.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">PI5</span>
+                    <span>Add ARIA attributes to improve form accessibility for screen reader users.</span>
+                </div>
+                <div class="lo-item">
+                    <span class="lo-badge">PI6</span>
+                    <span>Identify the 4 WCAG 2.1 principles and apply them to HTML structure.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FORM STRUCTURE ============ -->
+        <section class="lesson" id="forms">
+            <h2>HTML5 Form Structure</h2>
+            <p class="subtitle">&lt;form&gt;, &lt;fieldset&gt;, &lt;legend&gt;, &lt;label&gt;, &lt;button&gt;</p>
+
+            <table class="ref">
+                <tr><th><code>action</code></th><td>WHERE form data is sent (a URL).</td></tr>
+                <tr><th><code>method</code></th><td><code>GET</code> → data visible in URL (searches). <code>POST</code> → data hidden (logins, payments).</td></tr>
+                <tr><th><code>&lt;label for="id"&gt;</code></th><td>Links label text to its input field. Clicking the label focuses the input. Screen readers announce it aloud.</td></tr>
+                <tr><th><code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code></th><td>Groups related inputs visually. <code>&lt;legend&gt;</code> is the caption for the group. Improves keyboard + screen reader UX.</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><form>
+  <fieldset>
+    <legend>Personal Info</legend>
+
+    <label for="fname">Full Name:</label>
+    <input type="text" id="fname" name="fname">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+  </fieldset>
+
+  <fieldset>
+    <legend>Preferences</legend>
+    <!-- checkboxes, radios here -->
+  </fieldset>
+
+  <button type="submit">Send</button>
+  <button type="reset">Clear</button>
+</form></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ INPUT TYPES ============ -->
+        <section class="lesson" id="input-types">
+            <h2>HTML5 Input Types</h2>
+            <p class="subtitle">Use the correct type — it activates free mobile keyboards, date pickers, color pickers, and more</p>
+
+            <table class="ref">
+                <tr><th><code>type="text"</code></th><td>General single-line text</td></tr>
+                <tr><th><code>type="email"</code></th><td>Email format validation</td></tr>
+                <tr><th><code>type="password"</code></th><td>Masked characters</td></tr>
+                <tr><th><code>type="number"</code></th><td>Numeric spinner + up/down</td></tr>
+                <tr><th><code>type="tel"</code></th><td>Phone — phone keyboard on mobile</td></tr>
+                <tr><th><code>type="url"</code></th><td>URL format validation</td></tr>
+                <tr><th><code>type="date"</code></th><td>Native calendar date picker</td></tr>
+                <tr><th><code>type="time"</code></th><td>Time picker</td></tr>
+                <tr><th><code>type="color"</code></th><td>Native color picker — returns hex</td></tr>
+                <tr><th><code>type="range"</code></th><td>Slider (<code>min</code>, <code>max</code>, <code>step</code>)</td></tr>
+                <tr><th><code>type="search"</code></th><td>Search field with clear ×</td></tr>
+                <tr><th><code>type="checkbox"</code></th><td>Individual on/off toggle</td></tr>
+                <tr><th><code>type="radio"</code></th><td>One choice from a group</td></tr>
+                <tr><th><code>type="file"</code></th><td>File upload button</td></tr>
+                <tr><th><code>type="hidden"</code></th><td>Data sent with form, not shown</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><p><label>Text: <input type="text" placeholder="Your name"></label></p>
+<p><label>Email: <input type="email" placeholder="you@email.com"></label></p>
+<p><label>Date: <input type="date"></label></p>
+<p><label>Color: <input type="color"></label></p>
+<p><label>Range: <input type="range" min="0" max="10"></label></p>
+<p><label><input type="checkbox"> Subscribe</label></p>
+<p><label><input type="radio" name="demo"> Option A</label></p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ VALIDATION ATTRIBUTES ============ -->
+        <section class="lesson" id="validation">
+            <h2>HTML5 Validation Attributes</h2>
+            <p class="subtitle">Server-quality form validation with zero JavaScript required</p>
+
+            <div class="callout key">
+                <strong>Key insight:</strong> HTML5 validation runs in the browser BEFORE data is sent to the server — no JavaScript needed.
+            </div>
+
+            <table class="ref">
+                <tr><th><code>required</code></th><td>Field must not be empty on submit. <code>&lt;input type="email" required&gt;</code></td></tr>
+                <tr><th><code>placeholder</code></th><td>Greyed hint text inside field — disappears on typing. <code>&lt;input placeholder="Enter email"&gt;</code></td></tr>
+                <tr><th><code>pattern</code></th><td>Value must match the regular expression. <code>&lt;input pattern="[0-9]{11}"&gt;</code></td></tr>
+                <tr><th><code>minlength</code></th><td>Minimum character count (text inputs). <code>&lt;input minlength="8"&gt;</code></td></tr>
+                <tr><th><code>maxlength</code></th><td>Maximum character count (text inputs). <code>&lt;input maxlength="20"&gt;</code></td></tr>
+                <tr><th><code>min</code></th><td>Minimum value for number or date inputs. <code>&lt;input type="number" min="1"&gt;</code></td></tr>
+                <tr><th><code>max</code></th><td>Maximum value for number or date inputs. <code>&lt;input type="number" max="100"&gt;</code></td></tr>
+                <tr><th><code>step</code></th><td>Increment for number/range inputs. <code>&lt;input type="range" step="5"&gt;</code></td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><form>
+  <label for="phone">Phone (11 digits):</label>
+  <input type="text" id="phone" pattern="[0-9]{11}"
+         minlength="11" maxlength="11"
+         placeholder="09171234567" required>
+
+  <label for="age">Age:</label>
+  <input type="number" id="age" min="1" max="120" required>
+
+  <button type="submit">Submit</button>
+</form>
+
+<p><small>Try clicking Submit with the fields empty or invalid — the browser blocks it and shows a built-in message.</small></p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ MORE FORM ELEMENTS ============ -->
+        <section class="lesson" id="form-elements">
+            <h2>More Form Elements</h2>
+            <p class="subtitle">&lt;select&gt;, &lt;textarea&gt;, radio buttons, checkboxes — the essential form toolkit</p>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><!-- DROPDOWN SELECT -->
+<label for="subj">Subject:</label>
+<select id="subj" name="subj">
+  <option value="">-- Choose --</option>
+  <optgroup label="Technical">
+    <option value="bug">Bug Report</option>
+    <option value="feat">Feature</option>
+  </optgroup>
+  <option value="other">Other</option>
+</select>
+
+<!-- MULTI-LINE TEXT -->
+<p><label for="msg">Message:</label></p>
+<textarea id="msg" name="msg" rows="4" cols="30"
+  placeholder="Your message..."></textarea>
+
+<!-- RADIO BUTTONS (grouped by name) -->
+<fieldset>
+  <legend>Gender</legend>
+  <label><input type="radio" name="gender" value="male"> Male</label>
+  <label><input type="radio" name="gender" value="female"> Female</label>
+</fieldset>
+
+<!-- CHECKBOX (independent) -->
+<label><input type="checkbox" name="subscribe" value="yes"> Subscribe to newsletter</label></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                <strong>Key rule — Radio buttons:</strong> All radio buttons in the SAME GROUP must share the same <code>name</code> attribute. The <code>value</code> attribute tells the server WHICH option was chosen. Checkboxes are independent — each has its own <code>name</code>.
+            </div>
+        </section>
+
+        <!-- ============ MULTIMEDIA ============ -->
+        <section class="lesson" id="multimedia">
+            <h2>Multimedia Elements</h2>
+            <p class="subtitle">&lt;audio&gt;, &lt;video&gt;, &lt;source&gt;, fallback content, &lt;canvas&gt;</p>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><h3>Audio</h3>
+<audio controls>
+  <source src="song.mp3" type="audio/mpeg">
+  <source src="song.ogg" type="audio/ogg">
+  Your browser does not support audio playback.
+</audio>
+
+<h3>Video</h3>
+<video controls width="300" poster="https://picsum.photos/300/200">
+  <source src="clip.mp4" type="video/mp4">
+  <source src="clip.webm" type="video/webm">
+  Your browser does not support video playback.
+</video>
+
+<h3>Canvas (blank without JavaScript)</h3>
+<canvas id="myCanvas" width="300" height="80" style="border:1px solid #999;"></canvas></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <table class="ref">
+                    <tr><th><code>controls</code></th><td>Shows play/pause/volume controls</td></tr>
+                    <tr><th><code>autoplay</code></th><td>Plays on load (+ <code>muted</code> required)</td></tr>
+                    <tr><th><code>loop</code></th><td>Restarts after ending</td></tr>
+                    <tr><th><code>muted</code></th><td>Starts with sound off</td></tr>
+                </table>
+                <table class="ref">
+                    <tr><th><code>poster</code></th><td>Thumbnail image before play</td></tr>
+                    <tr><th><code>width</code>/<code>height</code></th><td>Pixel dimensions of the player</td></tr>
+                    <tr><th><code>autoplay</code> + <code>muted</code></th><td>Required pair for autoplay</td></tr>
+                    <tr><th><code>loop</code></th><td>Repeat playback continuously</td></tr>
+                </table>
+            </div>
+
+            <div class="callout">
+                <code>&lt;canvas id="myCanvas" width="400" height="200"&gt;</code> creates a blank drawing surface. JavaScript is <strong>required</strong> to draw on it — without JS, it's a completely invisible box (only visible above because we added a CSS border to it).
+            </div>
+        </section>
+
+        <!-- ============ ACCESSIBILITY & ARIA ============ -->
+        <section class="lesson" id="accessibility">
+            <h2>Accessibility &amp; ARIA</h2>
+            <p class="subtitle">WCAG 2.1 Principles · ARIA Roles &amp; Attributes · Keyboard Navigation</p>
+
+            <h3>WCAG 2.1 — Four Principles (POUR)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="margin-top:0;">👁 Perceivable</h3>
+                    <p>All information must be presentable to users in ways they can perceive — alt text for images, captions for video.</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0;">⌨ Operable</h3>
+                    <p>All UI must be navigable by keyboard alone — no mouse required. <code>tabindex</code>, focus order, skip links.</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0;">💡 Understandable</h3>
+                    <p>Content must be clear. Language declared (<code>lang</code> attribute). Error messages explain what went wrong.</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0;">🔧 Robust</h3>
+                    <p>Content must work with current and future assistive technologies — valid HTML, ARIA, semantic structure.</p>
+                </div>
+            </div>
+
+            <h3>Key ARIA Attributes for Forms</h3>
+            <table class="ref">
+                <tr><th><code>aria-required="true"</code></th><td>Tells screen readers a field is mandatory — use WITH the HTML <code>required</code> attribute.</td></tr>
+                <tr><th><code>aria-label="..."</code></th><td>Provides an accessible name when no visible label exists.</td></tr>
+                <tr><th><code>aria-describedby="id"</code></th><td>Points to an element that gives extra info about the field.</td></tr>
+                <tr><th><code>aria-hidden="true"</code></th><td>Hides decorative elements from screen readers.</td></tr>
+                <tr><th><code>aria-invalid="true"</code></th><td>Announces a validation error to assistive tech.</td></tr>
+                <tr><th><code>role="..."</code></th><td>Gives semantic meaning: <code>role="main"</code>, <code>role="navigation"</code>, <code>role="alert"</code>.</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><form>
+  <label for="uname">Username:</label>
+  <input type="text" id="uname" required
+         aria-required="true" aria-describedby="unameHint">
+  <p id="unameHint"><small>Must be 5-15 characters</small></p>
+
+  <label for="site-search">Search:</label>
+  <input type="search" id="site-search"
+         aria-label="Search site" placeholder="Search...">
+
+  <p><span aria-hidden="true">★</span> Decorative icon (hidden from screen readers)</p>
+</form></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ WEEK 4 LAB ACTIVITY ============ -->
+        <section class="lesson" id="w4-lab">
+            <h2>Laboratory Activity</h2>
+            <p class="subtitle">Accessible Contact Form &nbsp;·&nbsp; contact-form.html &nbsp;·&nbsp; 50 minutes &nbsp;·&nbsp; 50 points</p>
+
+            <div class="callout key">
+                🖥️ <strong>Task:</strong> Build an accessible contact form (<code>contact-form.html</code>) using ALL elements learned today.
+            </div>
+
+            <table class="ref rubric">
+                <tr><th>R1 · 5 pts</th><td><strong>HTML5 Boilerplate</strong> — DOCTYPE, <code>html lang</code>, <code>meta charset</code>, <code>meta viewport</code>, <code>title</code></td></tr>
+                <tr><th>R2 · 10 pts</th><td><strong>Form + 9 Input Types</strong> — text, email, tel, select, textarea, radio×3, checkbox, submit, reset</td></tr>
+                <tr><th>R3 · 8 pts</th><td><strong>Validation Attributes</strong> — <code>required</code>, <code>minlength</code>, <code>pattern=[0-9]{11}</code>, <code>placeholder</code>, <code>min</code>/<code>max</code> on age</td></tr>
+                <tr><th>R4 · 7 pts</th><td><strong>Labels + Fieldsets</strong> — Every input has <code>&lt;label for="id"&gt;</code>, 2 fieldsets with legends</td></tr>
+                <tr><th>R5 · 5 pts</th><td><strong>Audio Element</strong> — <code>&lt;audio controls&gt;</code> + <code>&lt;source&gt;</code> + fallback text</td></tr>
+                <tr><th>R6 · 5 pts</th><td><strong>Video Element</strong> — <code>&lt;video controls poster width&gt;</code> + 2 <code>&lt;source&gt;</code> + fallback</td></tr>
+                <tr><th>R7 · 5 pts</th><td><strong>ARIA Attributes</strong> — <code>aria-required</code>, <code>aria-label</code>, <code>aria-describedby</code>, <code>aria-hidden</code></td></tr>
+                <tr><th>R8 · 5 pts</th><td><strong>Semantic Structure</strong> — <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code></td></tr>
+            </table>
+
+            <div class="callout tip">
+                💡 Submit: <code>contact-form.html</code> + Chrome screenshot &nbsp;·&nbsp; Test all validation rules before submitting &nbsp;·&nbsp; <strong>Total: 50 points</strong>
+            </div>
+        </section>
+
+        <!-- ============ WEEK 4 SUMMARY ============ -->
+        <section class="lesson" id="w4-takeaways">
+            <h2>Key Takeaways</h2>
+            <p class="subtitle">What you learned today</p>
+
+            <ol class="takeaways">
+                <li>📋 <strong>Forms &amp; Inputs</strong> — <code>&lt;form&gt;</code>, <code>&lt;input&gt;</code> (15+ types), <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;fieldset&gt;</code>/<code>&lt;legend&gt;</code> — the complete form toolkit.</li>
+                <li>✅ <strong>Validation</strong> — <code>required</code>, <code>placeholder</code>, <code>pattern</code>, <code>minlength</code>/<code>maxlength</code>, <code>min</code>/<code>max</code> — the browser enforces rules, no JS needed.</li>
+                <li>🎬 <strong>Multimedia</strong> — <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> with <code>controls</code>, <code>source</code>, fallback. <code>&lt;canvas&gt;</code> is a blank JS drawing surface.</li>
+                <li>♿ <strong>Accessibility</strong> — WCAG POUR principles. ARIA: <code>aria-required</code>, <code>aria-label</code>, <code>aria-describedby</code>, <code>aria-hidden</code>.</li>
+            </ol>
+        </section>
+
     </main>
 
     <div class="next-week">
         <p class="eyebrow">▶ Next Week</p>
-        <h3>Week 4: HTML5 Advanced</h3>
-        <p>Forms, Input Types, Validation, Multimedia (Audio, Video, Canvas), ARIA &amp; Accessibility</p>
+        <h3>Week 5: CSS3 Fundamentals</h3>
+        <p>Selectors, Box Model, Typography, Colors</p>
     </div>
 
     <footer class="site-footer">

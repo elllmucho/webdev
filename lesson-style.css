@@ -73,6 +73,17 @@ nav.site-nav a:focus {
     background: rgba(255, 255, 255, 0.15);
     color: #fff;
 }
+nav.site-nav .nav-divider {
+    align-self: center;
+    color: #7d93ad;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 14px;
+    margin-left: 6px;
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
 
 /* ---------- Layout ---------- */
 main {
@@ -307,6 +318,32 @@ ol.takeaways li::before {
     color: #cfe0f2;
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* ---------- Week divider banner ---------- */
+.week-divider {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: #fff;
+    text-align: center;
+    padding: 36px 20px;
+    margin: 40px 0;
+    border-radius: var(--radius);
+}
+.week-divider .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    color: #b9cbe0;
+    margin-bottom: 6px;
+}
+.week-divider h2 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 1.8rem;
+}
+.week-divider p {
+    color: #d7e2ee;
+    margin: 0;
 }
 
 /* ---------- Try it Yourself editor ---------- */
