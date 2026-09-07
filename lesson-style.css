@@ -85,6 +85,33 @@ nav.site-nav .nav-divider {
     border-left: 1px solid rgba(255, 255, 255, 0.25);
 }
 
+/* ---------- Lesson jump dropdown ---------- */
+.lesson-jump {
+    background: #eef2f7;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.lesson-jump label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+}
+.lesson-jump select {
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    max-width: 260px;
+}
+
 /* ---------- Layout ---------- */
 main {
     max-width: 1000px;

@@ -46,4 +46,19 @@ function initTryItBoxes() {
     });
 }
 
+function initLessonJump() {
+    var select = document.getElementById("lesson-select");
+    if (!select) {
+        return;
+    }
+
+    select.addEventListener("change", function () {
+        if (select.value) {
+            window.location.hash = select.value;
+            select.value = "";
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", initTryItBoxes);
+document.addEventListener("DOMContentLoaded", initLessonJump);
