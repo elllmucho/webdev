@@ -17,7 +17,7 @@ function initTryItBoxes() {
         var resetBtn = box.querySelector(".tryit-reset");
         var originalCode = textarea.value;
 
-        iframe.setAttribute("sandbox", "allow-same-origin allow-popups");
+        iframe.setAttribute("sandbox", "allow-same-origin allow-popups allow-forms");
 
         function run() {
             iframe.srcdoc = buildSrcDoc(textarea.value);
