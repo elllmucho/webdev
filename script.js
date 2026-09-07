@@ -46,19 +46,33 @@ function initTryItBoxes() {
     });
 }
 
-function initLessonJump() {
-    var select = document.getElementById("lesson-select");
+function initModuleSwitch() {
+    var select = document.getElementById("module-select");
     if (!select) {
         return;
     }
 
+    var formSectionIds = [
+        "w4-objectives", "forms", "input-types", "validation",
+        "form-elements", "multimedia", "accessibility", "w4-lab", "w4-takeaways"
+    ];
+
+    function applyModule(module) {
+        document.querySelectorAll("[data-module]").forEach(function (el) {
+            el.style.display = el.getAttribute("data-module") === module ? "" : "none";
+        });
+    }
+
+    var currentHash = window.location.hash.replace("#", "");
+    var initialModule = formSectionIds.indexOf(currentHash) !== -1 ? "form" : "structure";
+    select.value = initialModule;
+    applyModule(initialModule);
+
     select.addEventListener("change", function () {
-        if (select.value) {
-            window.location.hash = select.value;
-            select.value = "";
-        }
+        applyModule(select.value);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
 document.addEventListener("DOMContentLoaded", initTryItBoxes);
-document.addEventListener("DOMContentLoaded", initLessonJump);
+document.addEventListener("DOMContentLoaded", initModuleSwitch);

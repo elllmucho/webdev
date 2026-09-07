@@ -47,69 +47,30 @@ header.site-header p {
     margin: 0 auto;
 }
 
-/* ---------- Nav ---------- */
-nav.site-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--navy);
-    padding: 10px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-}
-nav.site-nav a {
-    color: #cfe0f2;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 8px 12px;
-    border-radius: 20px;
-    transition: background 0.2s;
-}
-nav.site-nav a:hover,
-nav.site-nav a:focus {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-}
-nav.site-nav .nav-divider {
-    align-self: center;
-    color: #7d93ad;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-left: 14px;
-    margin-left: 6px;
-    border-left: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* ---------- Lesson jump dropdown ---------- */
-.lesson-jump {
-    background: #eef2f7;
-    border-bottom: 1px solid var(--border);
-    padding: 12px 20px;
+/* ---------- Module switch dropdown (in header) ---------- */
+.module-switch {
+    margin-top: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
 }
-.lesson-jump label {
+.module-switch label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--navy);
+    color: #d7e2ee;
 }
-.lesson-jump select {
+.module-switch select {
     font-family: inherit;
-    font-size: 0.9rem;
-    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--navy);
     background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 10px;
-    max-width: 260px;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
 }
 
 /* ---------- Layout ---------- */

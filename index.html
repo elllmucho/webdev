@@ -12,67 +12,24 @@
     <header class="site-header">
         <p class="eyebrow">Internet Programming and Web Development</p>
         <h1>HTML5 Fundamentals</h1>
-        <p>Document Structure · Semantic Elements · Text · Lists · Links · Images · Tables</p>
+        <div class="module-switch">
+            <label for="module-select">View topic:</label>
+            <select id="module-select">
+                <option value="structure">Document Structure</option>
+                <option value="form">Form</option>
+            </select>
+        </div>
     </header>
-
-    <nav class="site-nav">
-        <a href="#objectives">Objectives</a>
-        <a href="#structure">Document Structure</a>
-        <a href="#semantic">Semantic Elements</a>
-        <a href="#text">Text Formatting</a>
-        <a href="#lists">Lists</a>
-        <a href="#links-images">Links &amp; Images</a>
-        <a href="#tables">Tables</a>
-        <a href="#lab">Lab Activity</a>
-        <a href="#takeaways">Key Takeaways</a>
-        <span class="nav-divider">Form</span>
-        <a href="#forms">Forms</a>
-        <a href="#input-types">Input Types</a>
-        <a href="#validation">Validation</a>
-        <a href="#form-elements">Form Elements</a>
-        <a href="#multimedia">Multimedia</a>
-        <a href="#accessibility">Accessibility</a>
-        <a href="#w4-lab">Contact Form Lab</a>
-        <a href="#w4-takeaways">Form Summary</a>
-    </nav>
-
-    <div class="lesson-jump">
-        <label for="lesson-select">Jump to lesson:</label>
-        <select id="lesson-select">
-            <option value="">-- Choose a topic --</option>
-            <optgroup label="Document Structure">
-                <option value="#objectives">Objectives</option>
-                <option value="#structure">Document Structure</option>
-                <option value="#semantic">Semantic Elements</option>
-                <option value="#text">Text Formatting</option>
-                <option value="#lists">Lists</option>
-                <option value="#links-images">Links &amp; Images</option>
-                <option value="#tables">Tables</option>
-                <option value="#lab">Lab Activity</option>
-                <option value="#takeaways">Key Takeaways</option>
-            </optgroup>
-            <optgroup label="Form">
-                <option value="#forms">Forms</option>
-                <option value="#input-types">Input Types</option>
-                <option value="#validation">Validation</option>
-                <option value="#form-elements">Form Elements</option>
-                <option value="#multimedia">Multimedia</option>
-                <option value="#accessibility">Accessibility</option>
-                <option value="#w4-lab">Contact Form Lab</option>
-                <option value="#w4-takeaways">Form Summary</option>
-            </optgroup>
-        </select>
-    </div>
 
     <main>
 
-        <div class="week-divider">
+        <div class="week-divider" data-module="structure">
             <h2>Document Structure</h2>
             <p>Document Structure · Semantic Elements · Text · Lists · Links · Images · Tables</p>
         </div>
 
         <!-- ============ LEARNING OBJECTIVES ============ -->
-        <section class="lesson" id="objectives">
+        <section class="lesson" id="objectives" data-module="structure">
             <h2>Learning Objectives</h2>
             <p class="subtitle">By the end of this session, students will be able to:</p>
 
@@ -107,7 +64,7 @@
         </section>
 
         <!-- ============ DOCUMENT STRUCTURE ============ -->
-        <section class="lesson" id="structure">
+        <section class="lesson" id="structure" data-module="structure">
             <h2>HTML5 Document Structure</h2>
             <p class="subtitle">The required skeleton of every HTML5 webpage</p>
 
@@ -165,7 +122,7 @@
         </section>
 
         <!-- ============ SEMANTIC ELEMENTS ============ -->
-        <section class="lesson" id="semantic">
+        <section class="lesson" id="semantic" data-module="structure">
             <h2>HTML5 Semantic Elements</h2>
             <p class="subtitle">Two pages can look identical in a browser — semantic HTML tells machines what each part means</p>
 
@@ -238,7 +195,7 @@
         </section>
 
         <!-- ============ TEXT FORMATTING ============ -->
-        <section class="lesson" id="text">
+        <section class="lesson" id="text" data-module="structure">
             <h2>Text Formatting &amp; Headings</h2>
             <p class="subtitle">Structure and emphasize content with HTML5 text elements</p>
 
@@ -294,7 +251,7 @@
         </section>
 
         <!-- ============ LISTS ============ -->
-        <section class="lesson" id="lists">
+        <section class="lesson" id="lists" data-module="structure">
             <h2>HTML5 Lists</h2>
             <p class="subtitle">Three list types for organizing content</p>
 
@@ -384,7 +341,7 @@
         </section>
 
         <!-- ============ LINKS & IMAGES ============ -->
-        <section class="lesson" id="links-images">
+        <section class="lesson" id="links-images" data-module="structure">
             <h2>Links &amp; Images</h2>
             <p class="subtitle">Connecting pages and embedding visuals with &lt;a&gt; and &lt;img&gt;</p>
 
@@ -457,7 +414,7 @@
         </section>
 
         <!-- ============ TABLES ============ -->
-        <section class="lesson" id="tables">
+        <section class="lesson" id="tables" data-module="structure">
             <h2>HTML5 Tables</h2>
             <p class="subtitle">Structured data: &lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, colspan &amp; rowspan</p>
 
@@ -537,7 +494,7 @@
         </section>
 
         <!-- ============ LAB ACTIVITY ============ -->
-        <section class="lesson" id="lab">
+        <section class="lesson" id="lab" data-module="structure">
             <h2>Laboratory Activity</h2>
             <p class="subtitle">My Digital Profile Page &nbsp;·&nbsp; 45 minutes &nbsp;·&nbsp; 50 points</p>
 
@@ -562,7 +519,7 @@
         </section>
 
         <!-- ============ KEY TAKEAWAYS ============ -->
-        <section class="lesson" id="takeaways">
+        <section class="lesson" id="takeaways" data-module="structure">
             <h2>Key Takeaways</h2>
             <p class="subtitle">HTML5 Fundamentals: Document Structure · Semantic Elements · Text · Lists · Links · Images · Tables</p>
 
@@ -577,13 +534,13 @@
             </ol>
         </section>
 
-        <div class="week-divider">
+        <div class="week-divider" data-module="form">
             <h2>Form</h2>
             <p>Forms &amp; Validation · Multimedia Elements · Accessibility &amp; ARIA</p>
         </div>
 
         <!-- ============ WEEK 4 LEARNING OBJECTIVES ============ -->
-        <section class="lesson" id="w4-objectives">
+        <section class="lesson" id="w4-objectives" data-module="form">
             <h2>Learning Objectives</h2>
             <p class="subtitle">By the end of this lesson, you can:</p>
 
@@ -616,7 +573,7 @@
         </section>
 
         <!-- ============ FORM STRUCTURE ============ -->
-        <section class="lesson" id="forms">
+        <section class="lesson" id="forms" data-module="form">
             <h2>HTML5 Form Structure</h2>
             <p class="subtitle">&lt;form&gt;, &lt;fieldset&gt;, &lt;legend&gt;, &lt;label&gt;, &lt;button&gt;</p>
 
@@ -664,7 +621,7 @@
         </section>
 
         <!-- ============ INPUT TYPES ============ -->
-        <section class="lesson" id="input-types">
+        <section class="lesson" id="input-types" data-module="form">
             <h2>HTML5 Input Types</h2>
             <p class="subtitle">Use the correct type — it activates free mobile keyboards, date pickers, color pickers, and more</p>
 
@@ -711,7 +668,7 @@
         </section>
 
         <!-- ============ VALIDATION ATTRIBUTES ============ -->
-        <section class="lesson" id="validation">
+        <section class="lesson" id="validation" data-module="form">
             <h2>HTML5 Validation Attributes</h2>
             <p class="subtitle">Server-quality form validation with zero JavaScript required</p>
 
@@ -761,7 +718,7 @@
         </section>
 
         <!-- ============ MORE FORM ELEMENTS ============ -->
-        <section class="lesson" id="form-elements">
+        <section class="lesson" id="form-elements" data-module="form">
             <h2>More Form Elements</h2>
             <p class="subtitle">&lt;select&gt;, &lt;textarea&gt;, radio buttons, checkboxes — the essential form toolkit</p>
 
@@ -812,7 +769,7 @@
         </section>
 
         <!-- ============ MULTIMEDIA ============ -->
-        <section class="lesson" id="multimedia">
+        <section class="lesson" id="multimedia" data-module="form">
             <h2>Multimedia Elements</h2>
             <p class="subtitle">&lt;audio&gt;, &lt;video&gt;, &lt;source&gt;, fallback content, &lt;canvas&gt;</p>
 
@@ -869,7 +826,7 @@
         </section>
 
         <!-- ============ ACCESSIBILITY & ARIA ============ -->
-        <section class="lesson" id="accessibility">
+        <section class="lesson" id="accessibility" data-module="form">
             <h2>Accessibility &amp; ARIA</h2>
             <p class="subtitle">WCAG 2.1 Principles · ARIA Roles &amp; Attributes · Keyboard Navigation</p>
 
@@ -933,7 +890,7 @@
         </section>
 
         <!-- ============ WEEK 4 LAB ACTIVITY ============ -->
-        <section class="lesson" id="w4-lab">
+        <section class="lesson" id="w4-lab" data-module="form">
             <h2>Laboratory Activity</h2>
             <p class="subtitle">Accessible Contact Form &nbsp;·&nbsp; contact-form.html &nbsp;·&nbsp; 50 minutes &nbsp;·&nbsp; 50 points</p>
 
@@ -958,7 +915,7 @@
         </section>
 
         <!-- ============ WEEK 4 SUMMARY ============ -->
-        <section class="lesson" id="w4-takeaways">
+        <section class="lesson" id="w4-takeaways" data-module="form">
             <h2>Key Takeaways</h2>
             <p class="subtitle">What you learned today</p>
 
