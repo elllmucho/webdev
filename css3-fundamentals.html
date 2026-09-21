@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Fundamentals</title>
+    <link rel="stylesheet" href="lesson-style.css">
+    <script src="script.js" defer></script>
+</head>
+<body data-page="css3">
+
+    <header class="site-header">
+        <p class="eyebrow">Internet Programming and Web Development</p>
+        <h1>CSS3 Fundamentals</h1>
+        <p>Selectors &amp; Specificity · Cascade · Box Model · Colors · Typography · Web Fonts · Backgrounds · Borders · Shadows</p>
+        <div class="module-switch">
+            <label for="module-select">View topic:</label>
+            <select id="module-select">
+                <option value="structure">Document Structure</option>
+                <option value="form">Form</option>
+                <option value="css3">CSS3 Fundamentals</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============ LEARNING OBJECTIVES ============ -->
+        <section class="lesson" id="objectives">
+            <h2>Learning Objectives</h2>
+            <p class="subtitle">By the end of this session, you will be able to:</p>
+
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">LO1</span><span>Apply CSS to HTML using inline, internal, and external methods.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO2</span><span>Use element, class, ID, combinator, attribute, and pseudo selectors.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO3</span><span>Calculate specificity and resolve style conflicts.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO4</span><span>Explain the cascade and how inheritance works.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO5</span><span>Apply the box model, including <code>box-sizing</code>.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO6</span><span>Use color formats: keyword, HEX, RGB(A), HSL(A).</span></div>
+                <div class="lo-item"><span class="lo-badge">LO7</span><span>Style text with core typography properties.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO8</span><span>Embed custom fonts with <code>@font-face</code> and Google Fonts.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO9</span><span>Apply backgrounds, gradients, borders, and shadows.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO10</span><span>Build a fully styled UI component from scratch.</span></div>
+            </div>
+
+            <p class="subtitle" style="margin-top:16px;">Aligned to: CO2 &mdash; Design and develop well-structured, standards-compliant web pages using HTML5 and CSS3 following accessibility and web standards guidelines.</p>
+        </section>
+
+        <!-- ============ QUICK RECAP ============ -->
+        <section class="lesson" id="recap">
+            <h2>Quick Recap: CSS Syntax &amp; How We Apply It</h2>
+            <p class="subtitle">CSS = Cascading Style Sheets — it separates presentation (how a page looks) from structure (HTML)</p>
+
+            <pre>selector {
+  property: value;
+  property: value;
+}
+
+p { color: navy; }</pre>
+
+            <table class="ref">
+                <tr><th>Inline</th><td><code>style="color:red;"</code> — Highest priority. Avoid for maintainability.</td></tr>
+                <tr><th>Internal</th><td><code>&lt;style&gt;</code> in <code>&lt;head&gt;</code> — Fine for single-page demos.</td></tr>
+                <tr><th>External</th><td><code>&lt;link rel="stylesheet"&gt;</code> — Best practice: cacheable &amp; reusable across pages.</td></tr>
+            </table>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Inline vs. Internal</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><p style="color:red;">Inline style (highest priority)</p>
+
+<style>
+  p.internal { color: blue; }
+</style>
+<p class="internal">Internal stylesheet, in &lt;head&gt;</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <strong>Rule of thumb:</strong> keep styles in an external <code>.css</code> file linked from <code>&lt;head&gt;</code> — it separates concerns and lets the browser cache it.
+            </div>
+
+            <h3>External stylesheet — try it live</h3>
+            <p class="subtitle">This box simulates a real project: the left pane is your HTML, the right pane is a separate <code>styles.css</code> "file". Change <code>color</code> below (try <code>purple</code> or <code>#2f9e5c</code>), then click Run.</p>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself » External Stylesheet</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <div class="tryit-panes">
+                        <div class="tryit-pane">
+                            <div class="tryit-pane-label">index.html</div>
+                            <textarea class="tryit-code tryit-html" spellcheck="false"><p class="external-demo">Styled entirely from styles.css</p>
+<p class="external-demo">Change the color on the right, then click Run</p></textarea>
+                        </div>
+                        <div class="tryit-pane">
+                            <div class="tryit-pane-label">styles.css</div>
+                            <textarea class="tryit-code tryit-css" spellcheck="false">.external-demo {
+  color: red;
+  font-weight: 700;
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 4px;
+}</textarea>
+                        </div>
+                    </div>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout key">
+                🔗 In a real project, <code>styles.css</code> would be its own file on disk, linked with <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> in <code>&lt;head&gt;</code> — exactly like <code>css3-fundamentals.html</code> links to <code>lesson-style.css</code>. Both panes here just let you edit HTML and CSS separately, the same way you would across two real files, without leaving the browser.
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>01 · Selectors &amp; Specificity</h2>
+            <p>How CSS targets elements — and how conflicts get resolved</p>
+        </div>
+
+        <!-- ============ BASIC SELECTORS ============ -->
+        <section class="lesson" id="selectors">
+            <h2>Basic Selector Types</h2>
+            <p class="subtitle">The five ways to target elements before you add relationships or state</p>
+
+            <table class="ref">
+                <tr><th><code>*</code> Universal</th><td><code>* { margin: 0; }</code> — targets every element</td></tr>
+                <tr><th><code>E</code> Type / Element</th><td><code>p { line-height: 1.6; }</code> — targets every element of that tag</td></tr>
+                <tr><th><code>.</code> Class</th><td><code>.card { padding: 1rem; }</code> — targets every element with that class</td></tr>
+                <tr><th><code>#</code> ID</th><td><code>#main-nav { ... }</code> — targets the one element with that ID</td></tr>
+                <tr><th><code>,</code> Grouping</th><td><code>h1, h2, h3 { font-family: ...; }</code> — applies one rule to several selectors</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  * { margin: 0; padding: 4px; }
+  p { color: #444; }
+  .card { background: #eef2f7; border-radius: 6px; padding: 8px; }
+  #headline { color: #e8622c; }
+  h1, h2 { font-family: Georgia, serif; }
+</style>
+
+<h1 id="headline">Selectors in action</h1>
+<h2>Grouped with h1 above</h2>
+<p class="card">This paragraph has the <code>.card</code> class.</p>
+<p>This plain paragraph only matches the type selector.</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout key">
+                <strong>Best practice:</strong> prefer classes for reusable styling. Reserve IDs for unique, single-use hooks (and JS/anchor targets), not general styling.
+            </div>
+        </section>
+
+        <!-- ============ COMBINATORS ============ -->
+        <section class="lesson" id="combinators">
+            <h2>Combinators — Selecting by Relationship</h2>
+            <p class="subtitle">Target an element based on its position relative to another</p>
+
+            <table class="ref">
+                <tr><th><code>A B</code> Descendant</th><td><code>.card p { }</code> — any <code>B</code> inside <code>A</code>, at any depth</td></tr>
+                <tr><th><code>A &gt; B</code> Child</th><td><code>.card &gt; p { }</code> — <code>B</code> is a <strong>direct</strong> child of <code>A</code></td></tr>
+                <tr><th><code>A + B</code> Adjacent sibling</th><td><code>h2 + p { }</code> — <code>B</code> immediately after <code>A</code></td></tr>
+                <tr><th><code>A ~ B</code> General sibling</th><td><code>h2 ~ p { }</code> — any <code>B</code> after <code>A</code>, same parent</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .card > p { color: #2c5f9b; font-weight: bold; }
+  h2 + p { color: #e8622c; }
+  h2 ~ p { border-left: 3px solid #ccc; padding-left: 6px; }
+</style>
+
+<div class="card">
+  <p>Direct child of .card &mdash; blue &amp; bold</p>
+  <div><p>Grandchild, NOT a direct child &mdash; unaffected</p></div>
+</div>
+
+<h2>A Heading</h2>
+<p>Adjacent sibling of h2 &mdash; orange (also a general sibling)</p>
+<p>General sibling of h2 &mdash; only gets the border rule</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ ATTRIBUTE & PSEUDO-CLASSES ============ -->
+        <section class="lesson" id="attr-pseudo">
+            <h2>Attribute Selectors &amp; Pseudo-Classes</h2>
+            <p class="subtitle">Target elements by their attributes, or by the state they're currently in</p>
+
+            <h3>Attribute selectors</h3>
+            <table class="ref">
+                <tr><th><code>[type="text"]</code></th><td><code>input[type="text"] { }</code></td></tr>
+                <tr><th><code>[href^="https"]</code></th><td><code>a[href^="https"] { }</code> — <code>^=</code> starts with</td></tr>
+                <tr><th><code>[href$=".pdf"]</code></th><td><code>a[href$=".pdf"] { }</code> — <code>$=</code> ends with</td></tr>
+                <tr><th><code>[alt]</code></th><td><code>img[alt] { }</code> — has the attribute at all</td></tr>
+            </table>
+
+            <h3>Pseudo-classes — element in a state</h3>
+            <table class="ref">
+                <tr><th><code>:hover</code></th><td><code>a:hover { color: orange; }</code></td></tr>
+                <tr><th><code>:focus</code></th><td><code>input:focus { outline: 2px solid; }</code></td></tr>
+                <tr><th><code>:first-child</code></th><td><code>li:first-child { margin-top: 0; }</code></td></tr>
+                <tr><th><code>:last-child</code></th><td><code>li:last-child { margin-bottom: 0; }</code></td></tr>
+                <tr><th><code>:nth-child(2n)</code></th><td><code>tr:nth-child(2n) { background: #f5f5f5; }</code></td></tr>
+                <tr><th><code>:not(...)</code></th><td><code>button:not(.disabled) { cursor: pointer; }</code></td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  a[href^="https"]::after { content: " 🔒"; }
+  input:focus { outline: 2px solid #e8622c; }
+  tr:nth-child(2n) { background: #f5f5f5; }
+  button:not(.disabled) { cursor: pointer; background: #2c5f9b; color: #fff; border: none; padding: 6px 14px; border-radius: 4px; }
+  button.disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+<p><a href="https://example.com">Secure link</a> &mdash; hover it and click into the input below</p>
+<p><input type="text" placeholder="Click to focus me"></p>
+
+<table border="1" cellpadding="6">
+  <tr><td>Row 1</td></tr>
+  <tr><td>Row 2 (striped)</td></tr>
+  <tr><td>Row 3</td></tr>
+</table>
+
+<p><button type="button">Enabled</button> <button type="button" class="disabled">Disabled</button></p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PSEUDO-ELEMENTS ============ -->
+        <section class="lesson" id="pseudo-elements">
+            <h2>Pseudo-Elements — Styling a Part of an Element</h2>
+            <p class="subtitle"><code>::before</code> and <code>::after</code> insert generated content before/after an element's content — icons, quote marks, clearfix hacks</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Where does each one land?</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .demo {
+    font-size: 1.1rem;
+    background: #fbfcfe;
+    border: 1px solid #dde3ea;
+    padding: 10px 14px;
+    border-radius: 6px;
+  }
+  .demo::before {
+    content: "BEFORE";
+    background: #2c5f9b;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  .demo::after {
+    content: "AFTER";
+    background: #e8622c;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+</style>
+
+<p class="demo">This is the element's real text content</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <p class="subtitle" style="margin-top:18px;">Real-world use: decorative quote marks that aren't part of the actual text (so screen readers and copy/paste skip them)</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Smart Quotes</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .quote { font-size: 1.3rem; font-style: italic; }
+  .quote::before {
+    content: "\201C";
+    color: #e8622c;
+    font-size: 2rem;
+    margin-right: 4px;
+  }
+  .quote::after {
+    content: "\201D";
+    color: #e8622c;
+    font-size: 2rem;
+    margin-left: 2px;
+  }
+</style>
+
+<p class="quote">Great design is invisible.</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <p class="subtitle"><code>::first-line</code> and <code>::first-letter</code> are also common — for editorial / magazine-style typography.</p>
+        </section>
+
+        <!-- ============ SPECIFICITY ============ -->
+        <section class="lesson" id="specificity">
+            <h2>Who Wins? The Specificity Hierarchy</h2>
+            <p class="subtitle">When two rules target the same element, the browser scores each selector and the higher score wins</p>
+
+            <table class="ref">
+                <tr><th>1000</th><td><strong>Inline style</strong> — <code>style="color:red;"</code></td></tr>
+                <tr><th>100</th><td><strong>ID selector</strong> — <code>#header { }</code></td></tr>
+                <tr><th>10</th><td><strong>Class / Attribute / Pseudo-class</strong> — <code>.btn</code>, <code>[type]</code>, <code>:hover</code></td></tr>
+                <tr><th>1</th><td><strong>Element / Pseudo-element</strong> — <code>p</code>, <code>::before</code></td></tr>
+            </table>
+
+            <h3>Worked example</h3>
+            <pre>#nav .item a:hover { color: orange; }</pre>
+            <table class="ref">
+                <tr><th><code>#nav</code></th><td>1 ID &nbsp;&rarr;&nbsp; +100</td></tr>
+                <tr><th><code>.item</code></th><td>1 class &nbsp;&rarr;&nbsp; +10</td></tr>
+                <tr><th><code>:hover</code></th><td>1 pseudo-class &nbsp;&rarr;&nbsp; +10</td></tr>
+                <tr><th><code>a</code></th><td>1 element &nbsp;&rarr;&nbsp; +1</td></tr>
+            </table>
+            <p class="subtitle"><strong>Total specificity = 100 + 10 + 10 + 1 = 121</strong></p>
+
+            <div class="callout">
+                <code>!important</code> overrides normal specificity entirely — powerful, but makes styles hard to override later. Use sparingly.
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>02 · The Cascade</h2>
+            <p>How the browser picks a winner when rules conflict</p>
+        </div>
+
+        <!-- ============ CASCADE ORDER ============ -->
+        <section class="lesson" id="cascade-order">
+            <h2>Order of Precedence When Rules Conflict</h2>
+
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">1</span><span><strong>Origin &amp; Importance</strong> — user <code>!important</code> &gt; author <code>!important</code> &gt; author styles &gt; user styles &gt; browser default</span></div>
+                <div class="lo-item"><span class="lo-badge">2</span><span><strong>Specificity</strong> — higher specificity wins (inline &gt; ID &gt; class &gt; element)</span></div>
+                <div class="lo-item"><span class="lo-badge">3</span><span><strong>Source Order</strong> — if specificity ties, the last rule declared wins</span></div>
+            </div>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself » Which Rule Wins?</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  /* SOURCE ORDER: same specificity (both are .msg) — the LAST rule wins */
+  .msg { color: blue; }
+  .msg { color: green; }
+
+  /* SPECIFICITY: element(1) < class(10) < id(100) */
+  p { color: black; }
+  .msg { color: purple; }
+  #winner { color: orange; }
+</style>
+
+<p class="msg">Source order tie: two ".msg" rules above, last one wins &rarr; should be green</p>
+<p id="winner" class="msg">Specificity: #winner (100) beats .msg (10) &rarr; should be orange</p>
+<p class="msg" style="color: red;">Inline style still beats everything &rarr; red</p>
+
+<!-- Try this: add "!important" after "color: purple" above, then Run again -->
+<!-- Try this: delete the "#winner" rule and see .msg take over -->
+<!-- Try this: reorder the two .msg rules and watch which color wins --></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                Edit the CSS above: reorder rules, delete the <code>#winner</code> rule, or add <code>!important</code> — then click Run and watch which color wins change with it.
+            </div>
+        </section>
+
+        <!-- ============ INHERITANCE ============ -->
+        <section class="lesson" id="inheritance">
+            <h2>Inheritance &amp; Special Values</h2>
+            <p class="subtitle">Some properties pass down from parent to child automatically — others don't</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="margin-top:0;">Inherited by default</h3>
+                    <p><code>color</code>, <code>font-family</code>, <code>font-size</code>, <code>line-height</code>, <code>text-align</code>, <code>visibility</code></p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0;">Not inherited by default</h3>
+                    <p><code>margin</code>, <code>padding</code>, <code>border</code>, <code>background</code>, <code>width</code>, <code>height</code></p>
+                </div>
+            </div>
+
+            <table class="ref" style="margin-top:20px;">
+                <tr><th><code>inherit</code></th><td>Force this property to take its parent's computed value</td></tr>
+                <tr><th><code>initial</code></th><td>Reset the property to the CSS spec's default value</td></tr>
+                <tr><th><code>unset</code></th><td>Acts as <code>inherit</code> if the property normally inherits, else <code>initial</code></td></tr>
+                <tr><th><code>revert</code></th><td>Reset to the browser's built-in (user-agent) stylesheet value</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself » Inheritance in Action</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .parent {
+    color: teal;
+    font-family: Georgia, serif;
+    border: 3px dashed #999;
+    padding: 16px;
+  }
+  .child-a { }                        /* nothing set — just inherits normally */
+  .child-b { border: inherit; }       /* border is NOT inherited by default — force it */
+  .child-c { color: initial; }        /* reset color back to the CSS default (black) */
+</style>
+
+<div class="parent">
+  Parent: teal text, Georgia font, dashed border (border does NOT pass to children automatically)
+  <p class="child-a">child-a: inherits color &amp; font automatically, but no border</p>
+  <p class="child-b">child-b: added <code>border: inherit</code> &mdash; now it has a border too</p>
+  <p class="child-c">child-c: added <code>color: initial</code> &mdash; back to default black</p>
+</div>
+
+<!-- Try this: change .child-c to "color: unset" or "color: revert" and compare -->
+<!-- Try this: add "font-family: initial" to .child-a --></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>03 · The Box Model</h2>
+            <p>Every element is a box: content, padding, border, margin</p>
+        </div>
+
+        <!-- ============ BOX MODEL ============ -->
+        <section class="lesson" id="box-model">
+            <h2>Content → Padding → Border → Margin</h2>
+
+            <table class="ref">
+                <tr><th>Content</th><td><code>width</code> / <code>height</code> — the actual text, image, etc.</td></tr>
+                <tr><th>Padding</th><td>Space between content and the border</td></tr>
+                <tr><th>Border</th><td>The line around the padding (width, style, color)</td></tr>
+                <tr><th>Margin</th><td>Space between this box and neighboring elements</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .box {
+    width: 200px;
+    background: #cfe0f2;
+    padding: 20px;
+    border: 8px solid #2c5f9b;
+    margin: 30px;
+  }
+</style>
+
+<div class="box">This is the content. Try changing padding, border, and margin to see each layer.</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ BOX-SIZING ============ -->
+        <section class="lesson" id="box-sizing">
+            <h2><code>box-sizing</code>: content-box vs border-box</h2>
+
+            <table class="ref">
+                <tr><th>content-box <span style="font-weight:400;">(default)</span></th><td><code>width: 300px</code> applies to content only — rendered width = 300 + padding + border</td></tr>
+                <tr><th>border-box <span style="font-weight:400;">(recommended)</span></th><td><code>width: 300px</code> includes padding + border — rendered width stays 300px, padding/border eat into the content area instead</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  div { padding: 20px; border: 10px solid #e8622c; margin-bottom: 12px; color: #fff; font-family: sans-serif; }
+  .content-box { box-sizing: content-box; width: 300px; background: #2c5f9b; }
+  .border-box { box-sizing: border-box; width: 300px; background: #1b2a41; }
+</style>
+
+<div class="content-box">content-box: 300px + padding + border = wider than 300px</div>
+<div class="border-box">border-box: stays exactly 300px total</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <pre>*, *::before, *::after { box-sizing: border-box; } /* common reset — predictable sizing */</pre>
+        </section>
+
+        <!-- ============ MARGIN COLLAPSING ============ -->
+        <section class="lesson" id="margin-collapsing">
+            <h2>Margin Collapsing &amp; Inspecting the Box Model</h2>
+
+            <h3>Margin collapsing</h3>
+            <p>When two block elements stack vertically, their top/bottom margins can overlap and collapse into a single margin — equal to the <strong>larger</strong> of the two, not the sum.</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  p { background: #eef2f7; padding: 4px; }
+  .a { margin-bottom: 40px; }
+  .b { margin-top: 30px; }
+</style>
+
+<p class="a">Box A &mdash; margin-bottom: 40px</p>
+<p class="b">Box B &mdash; margin-top: 30px (gap collapses to 40px, not 70px)</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout key">
+                <strong>DevTools tip:</strong> Right-click any element → Inspect → the Elements panel's Computed tab shows a live box-model diagram with real pixel values for content, padding, border, and margin. Use it to debug unexpected spacing before changing any CSS.
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>04 · Colors</h2>
+            <p>Five ways to describe the same color in CSS</p>
+        </div>
+
+        <!-- ============ COLORS ============ -->
+        <section class="lesson" id="colors">
+            <h2>CSS Color Formats</h2>
+
+            <table class="ref">
+                <tr><th>Keyword</th><td><code>steelblue</code></td></tr>
+                <tr><th>HEX</th><td><code>#4682B4</code></td></tr>
+                <tr><th>RGB</th><td><code>rgb(70, 130, 180)</code></td></tr>
+                <tr><th>RGBA</th><td><code>rgba(70, 130, 180, 0.6)</code> — with alpha (transparency)</td></tr>
+                <tr><th>HSL</th><td><code>hsl(207, 44%, 49%)</code></td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .swatch { display: inline-block; width: 110px; height: 90px; margin: 6px; border-radius: 6px; color: #fff; font: 12px sans-serif; text-align: center; padding-top: 34px; box-sizing: border-box; }
+</style>
+
+<div class="swatch" style="background: steelblue;">keyword<br>steelblue</div>
+<div class="swatch" style="background: #4682B4;">HEX<br>#4682B4</div>
+<div class="swatch" style="background: rgb(70,130,180);">rgb()<br>same color</div>
+<div class="swatch" style="background: rgba(70,130,180,0.5);">rgba() 50%<br>alpha only</div>
+<div class="swatch" style="background: hsl(207,44%,49%);">hsl()<br>same color</div>
+<div class="swatch" style="background: hsl(207,44%,75%);">hsl() +L<br>lighter tint</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <strong>Why HSL?</strong> Hue-Saturation-Lightness makes it easy to create tints/shades of the same hue — just change the L value. Remember: <code>opacity</code> affects the whole element + children; the alpha channel (RGBA/HSLA) only affects that color.
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>05 · Typography</h2>
+            <p>Font families, sizing units, and text styling</p>
+        </div>
+
+        <!-- ============ FONT FAMILIES ============ -->
+        <section class="lesson" id="font-families">
+            <h2>Font Families &amp; Font Stacks</h2>
+            <pre>font-family: "Poppins", "Segoe UI", Arial, sans-serif;</pre>
+
+            <table class="ref">
+                <tr><th>Serif</th><td>Times New Roman, Georgia</td></tr>
+                <tr><th>Sans-serif</th><td>Arial, Helvetica, Calibri</td></tr>
+                <tr><th>Monospace</th><td>Courier New, Consolas</td></tr>
+            </table>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><p style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem;">Serif — Aa</p>
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: 1.3rem;">Sans-serif — Aa</p>
+<p style="font-family: 'Courier New', Consolas, monospace; font-size: 1.3rem;">Monospace — Aa</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                Always end a font stack with a generic family as a fallback — if custom fonts fail to load, the browser still renders sensibly.
+            </div>
+        </section>
+
+        <!-- ============ SIZING UNITS ============ -->
+        <section class="lesson" id="sizing-units">
+            <h2>Sizing Units: px, %, em, rem</h2>
+
+            <table class="ref">
+                <tr><th><code>px</code></th><td>Fixed pixel value — doesn't scale with user/browser settings. e.g. <code>16px</code></td></tr>
+                <tr><th><code>%</code></th><td>Relative to the parent element's font-size. e.g. <code>150%</code></td></tr>
+                <tr><th><code>em</code></th><td>Relative to the current element's (or parent's) font-size — compounds when nested. e.g. <code>1.5em</code></td></tr>
+                <tr><th><code>rem</code></th><td>Relative to the root (<code>&lt;html&gt;</code>) font-size — predictable, recommended for accessibility. e.g. <code>1.5rem</code></td></tr>
+            </table>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><div style="font-size: 20px;">
+  <p style="font-size: 16px;">px: always 16px</p>
+  <p style="font-size: 150%;">%: 150% of parent's 20px = 30px</p>
+  <p style="font-size: 1.5em;">em: 1.5 &times; parent's 20px = 30px</p>
+  <p style="font-size: 1.5rem;">rem: 1.5 &times; root font-size, ignores parent</p>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ TEXT STYLING ============ -->
+        <section class="lesson" id="text-styling">
+            <h2>Core Text Styling Properties</h2>
+
+            <table class="ref">
+                <tr><th><code>font-weight</code></th><td><code>normal</code> | <code>bold</code> | <code>100</code>–<code>900</code></td></tr>
+                <tr><th><code>font-style</code></th><td><code>normal</code> | <code>italic</code></td></tr>
+                <tr><th><code>line-height</code></th><td><code>1.5</code> (unitless preferred)</td></tr>
+                <tr><th><code>letter-spacing</code></th><td><code>0.5px</code></td></tr>
+                <tr><th><code>text-align</code></th><td><code>left</code> | <code>center</code> | <code>right</code> | <code>justify</code></td></tr>
+                <tr><th><code>text-decoration</code></th><td><code>underline</code> | <code>line-through</code> | <code>none</code></td></tr>
+                <tr><th><code>text-transform</code></th><td><code>uppercase</code> | <code>capitalize</code></td></tr>
+                <tr><th><code>text-indent</code></th><td><code>2em</code></td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><p style="font-weight: bold;">font-weight: bold</p>
+<p style="font-style: italic;">font-style: italic</p>
+<p style="letter-spacing: 2px; text-transform: uppercase;">letter-spacing + uppercase</p>
+<p style="text-align: center;">text-align: center</p>
+<p style="text-decoration: underline;">text-decoration: underline</p>
+<p style="text-decoration: line-through;">text-decoration: line-through</p>
+<p style="text-indent: 2em;">text-indent pushes the first line in, like a paragraph in a printed book.</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>06 · Web Fonts</h2>
+            <p>Going beyond web-safe fonts with @font-face and Google Fonts</p>
+        </div>
+
+        <!-- ============ WEB FONTS ============ -->
+        <section class="lesson" id="web-fonts">
+            <h2>@font-face &amp; Google Fonts</h2>
+
+            <table class="ref">
+                <tr>
+                    <th>Self-hosted with <code>@font-face</code></th>
+                    <td><pre style="margin:0;">@font-face {
+  font-family: "Poppins";
+  src: url("poppins.woff2")
+       format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}</pre></td>
+                </tr>
+                <tr>
+                    <th>Hosted via Google Fonts</th>
+                    <td><pre style="margin:0;">&lt;link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap"&gt;</pre>
+                    <code>body { font-family: "Poppins", sans-serif; }</code></td>
+                </tr>
+            </table>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+<style>
+  h2 { font-family: "Poppins", sans-serif; font-weight: 700; }
+</style>
+
+<h2>Loaded from Google Fonts: Poppins</h2>
+<p>(needs an internet connection to fetch the font)</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <code>font-display: swap</code> shows a fallback font immediately, then swaps once the custom font loads — avoids invisible text while waiting.
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>07 · Backgrounds</h2>
+            <p>Color, images, positioning, and gradients</p>
+        </div>
+
+        <!-- ============ BACKGROUNDS ============ -->
+        <section class="lesson" id="backgrounds">
+            <h2>Background Properties</h2>
+
+            <table class="ref">
+                <tr><th><code>background-color</code></th><td><code>#f5f5f5</code></td></tr>
+                <tr><th><code>background-image</code></th><td><code>url("bg.jpg")</code></td></tr>
+                <tr><th><code>background-repeat</code></th><td><code>no-repeat</code> | <code>repeat-x</code></td></tr>
+                <tr><th><code>background-position</code></th><td><code>center</code> | <code>20px 40px</code></td></tr>
+                <tr><th><code>background-size</code></th><td><code>cover</code> | <code>contain</code></td></tr>
+                <tr><th><code>background-attachment</code></th><td><code>fixed</code> | <code>scroll</code></td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .box { height: 100px; border-radius: 8px; margin-bottom: 10px; color: #fff; font: 14px sans-serif; padding: 10px; box-sizing: border-box; }
+  .solid { background-color: #f5f5f5; color: #222; }
+  .gradient { background: linear-gradient(90deg, #1572B6, #e8622c); }
+  .photo { background-image: url("https://picsum.photos/400/200"); background-size: cover; background-position: center; }
+</style>
+
+<div class="box solid">background-color: #f5f5f5</div>
+<div class="box gradient">linear-gradient(90deg, #1572B6, #e8622c)</div>
+<div class="box photo">background-image + size: cover</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <pre>/* shorthand */
+background: #222 url(bg.jpg) no-repeat center / cover;</pre>
+        </section>
+
+        <div class="week-divider">
+            <h2>08 · Borders</h2>
+            <p>Widths, styles, colors, and rounded corners</p>
+        </div>
+
+        <!-- ============ BORDERS ============ -->
+        <section class="lesson" id="borders">
+            <h2>Border Styles &amp; <code>border-radius</code></h2>
+            <pre>border: 2px solid #1572B6;
+border-top: 4px dashed #e8622c;</pre>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .row div { display: inline-block; width: 90px; height: 60px; margin: 8px; text-align: center; line-height: 60px; font: 12px sans-serif; }
+  .solid { border: 4px solid #2c5f9b; }
+  .dashed { border: 4px dashed #2c5f9b; }
+  .dotted { border: 4px dotted #2c5f9b; }
+  .double { border: 6px double #2c5f9b; }
+
+  .radius div { display: inline-block; width: 70px; height: 70px; margin: 8px; background: #e8622c; }
+  .r0 { border-radius: 0; }
+  .r8 { border-radius: 8px; }
+  .r24 { border-radius: 24px; }
+  .r50 { border-radius: 50%; }
+</style>
+
+<div class="row">
+  <div class="solid">solid</div>
+  <div class="dashed">dashed</div>
+  <div class="dotted">dotted</div>
+  <div class="double">double</div>
+</div>
+
+<div class="radius">
+  <div class="r0"></div>
+  <div class="r8"></div>
+  <div class="r24"></div>
+  <div class="r50"></div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <code>border-radius: 50%</code> on a square element makes a perfect circle — the classic technique for circular avatars.
+            </div>
+        </section>
+
+        <div class="week-divider">
+            <h2>09 · Shadows</h2>
+            <p>Adding depth with box-shadow and text-shadow</p>
+        </div>
+
+        <!-- ============ SHADOWS ============ -->
+        <section class="lesson" id="shadows">
+            <h2><code>box-shadow</code> &amp; <code>text-shadow</code></h2>
+            <pre>box-shadow: 0 4px 12px rgba(0,0,0,.25);
+/*           x  y  blur  spread  color */
+
+text-shadow: 2px 2px 4px rgba(0,0,0,.5);</pre>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .card { width: 220px; padding: 20px; margin: 20px auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.25); text-align: center; font: 14px sans-serif; }
+  .shadow-text { text-align: center; font: bold 28px sans-serif; color: #2c5f9b; text-shadow: 2px 2px 4px rgba(0,0,0,.5); }
+</style>
+
+<div class="card">Card with box-shadow</div>
+<p class="shadow-text">Shadowed Text</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                Tip: stack multiple shadows (comma-separated) for richer depth, or use <code>inset</code> for a pressed-in look.
+            </div>
+        </section>
+
+        <!-- ============ LAB ACTIVITY ============ -->
+        <section class="lesson" id="lab">
+            <h2>Laboratory Activity</h2>
+            <p class="subtitle">Style a Profile Card &nbsp;·&nbsp; contact styles.css &nbsp;·&nbsp; 20 points</p>
+
+            <div class="callout key">
+                🖥️ <strong>Task:</strong> Starting from a plain, unstyled HTML file, apply everything from today's session to build a polished profile card component.
+            </div>
+
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Link an external stylesheet (<code>styles.css</code>)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Use 3+ selector types, including one pseudo-class (<code>:hover</code>)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Apply <code>box-sizing: border-box</code> globally</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Define a custom color palette (HEX or HSL)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Apply a Google Font or <code>@font-face</code> to headings</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Add a background (gradient or image)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Round the avatar into a circle with <code>border-radius</code></span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Apply <code>box-shadow</code> to the card and <code>text-shadow</code> to the name</span></div>
+            </div>
+
+            <table class="ref rubric" style="margin-top:20px;">
+                <tr><th>4 pts</th><td>Selectors &amp; Specificity</td></tr>
+                <tr><th>3 pts</th><td>Box Model</td></tr>
+                <tr><th>3 pts</th><td>Colors</td></tr>
+                <tr><th>4 pts</th><td>Typography / Web Fonts</td></tr>
+                <tr><th>2 pts</th><td>Backgrounds</td></tr>
+                <tr><th>2 pts</th><td>Borders</td></tr>
+                <tr><th>2 pts</th><td>Shadows</td></tr>
+            </table>
+
+            <div class="callout tip">
+                💡 Save as <code>styles.css</code> linked from your profile card HTML &nbsp;·&nbsp; <strong>Total: 20 points</strong>
+            </div>
+        </section>
+
+        <!-- ============ KEY TAKEAWAYS ============ -->
+        <section class="lesson" id="takeaways">
+            <h2>Key Takeaways</h2>
+            <p class="subtitle">CSS3 Fundamentals: Selectors · Specificity · Cascade · Box Model · Colors · Typography · Web Fonts · Backgrounds · Borders · Shadows</p>
+
+            <ol class="takeaways">
+                <li>CSS separates presentation from structure — external stylesheets are best practice.</li>
+                <li>The cascade resolves conflicts using importance, specificity, then source order.</li>
+                <li>The box model (content, padding, border, margin) underlies all CSS layout.</li>
+                <li>Consistent color, type, and spacing choices are what make an interface feel professional.</li>
+                <li>These fundamentals are the foundation for the next lesson: Flexbox, Grid, and positioning.</li>
+            </ol>
+        </section>
+
+        <!-- ============ REFERENCES ============ -->
+        <section class="lesson" id="references">
+            <h2>References</h2>
+            <p class="subtitle">Course resources for this topic</p>
+
+            <table class="ref">
+                <tr><th>MDN Web Docs</th><td>CSS Reference — <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Web/CSS</a></td></tr>
+                <tr><th>CSS-Tricks</th><td><a href="https://css-tricks.com" target="_blank" rel="noopener">css-tricks.com</a></td></tr>
+                <tr><th>W3Schools</th><td>CSS Tutorial — <a href="https://www.w3schools.com/css" target="_blank" rel="noopener">w3schools.com/css</a></td></tr>
+                <tr><th>Duckett, J. (2014)</th><td><em>HTML &amp; CSS: Design and Build Websites.</em> Wiley.</td></tr>
+                <tr><th>Freeman &amp; Robson (2020)</th><td><em>Head First HTML and CSS</em> (2nd ed.). O'Reilly.</td></tr>
+                <tr><th>Robbins, J. N. (2018)</th><td><em>Learning Web Design</em> (5th ed.). O'Reilly.</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <div class="next-week">
+        <p class="eyebrow">▶ Next Week</p>
+        <h3>CSS3 Layouts</h3>
+        <p>Flexbox, Grid, Positioning, Variables, Transitions &amp; Animations</p>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Internet Programming and Web Development — CSS3 Fundamentals Lesson Site</p>
+    </footer>
+
+</body>
+</html>

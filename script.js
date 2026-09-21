@@ -11,16 +11,28 @@ function initTryItBoxes() {
     var boxes = document.querySelectorAll(".tryit");
 
     boxes.forEach(function (box) {
-        var textarea = box.querySelector(".tryit-code");
+        var htmlArea = box.querySelector(".tryit-html");
+        var cssArea = box.querySelector(".tryit-css");
+        var singleArea = box.querySelector(".tryit-code:not(.tryit-html):not(.tryit-css)");
         var iframe = box.querySelector(".tryit-frame");
         var runBtn = box.querySelector(".tryit-run");
         var resetBtn = box.querySelector(".tryit-reset");
-        var originalCode = textarea.value;
+
+        var originalHtml = htmlArea ? htmlArea.value : null;
+        var originalCss = cssArea ? cssArea.value : null;
+        var originalSingle = singleArea ? singleArea.value : null;
 
         iframe.setAttribute("sandbox", "allow-same-origin allow-popups allow-forms");
 
+        function getCode() {
+            if (htmlArea && cssArea) {
+                return "<style>\n" + cssArea.value + "\n</style>\n" + htmlArea.value;
+            }
+            return singleArea.value;
+        }
+
         function run() {
-            iframe.srcdoc = buildSrcDoc(textarea.value);
+            iframe.srcdoc = buildSrcDoc(getCode());
         }
 
         run();
@@ -28,20 +40,24 @@ function initTryItBoxes() {
         runBtn.addEventListener("click", run);
 
         resetBtn.addEventListener("click", function () {
-            textarea.value = originalCode;
+            if (htmlArea) { htmlArea.value = originalHtml; }
+            if (cssArea) { cssArea.value = originalCss; }
+            if (singleArea) { singleArea.value = originalSingle; }
             run();
         });
 
-        textarea.addEventListener("keydown", function (event) {
-            if (event.key === "Tab") {
-                event.preventDefault();
-                var start = textarea.selectionStart;
-                var end = textarea.selectionEnd;
-                textarea.value = textarea.value.slice(0, start) + "  " + textarea.value.slice(end);
-                textarea.selectionStart = textarea.selectionEnd = start + 2;
-            } else if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
-                run();
-            }
+        [htmlArea, cssArea, singleArea].filter(Boolean).forEach(function (textarea) {
+            textarea.addEventListener("keydown", function (event) {
+                if (event.key === "Tab") {
+                    event.preventDefault();
+                    var start = textarea.selectionStart;
+                    var end = textarea.selectionEnd;
+                    textarea.value = textarea.value.slice(0, start) + "  " + textarea.value.slice(end);
+                    textarea.selectionStart = textarea.selectionEnd = start + 2;
+                } else if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+                    run();
+                }
+            });
         });
     });
 }
@@ -51,6 +67,8 @@ function initModuleSwitch() {
     if (!select) {
         return;
     }
+
+    var page = document.body.getAttribute("data-page") || "html5";
 
     var formSectionIds = [
         "w4-objectives", "forms", "input-types", "validation",
@@ -63,14 +81,34 @@ function initModuleSwitch() {
         });
     }
 
-    var currentHash = window.location.hash.replace("#", "");
-    var initialModule = formSectionIds.indexOf(currentHash) !== -1 ? "form" : "structure";
-    select.value = initialModule;
-    applyModule(initialModule);
+    if (page === "html5") {
+        var currentHash = window.location.hash.replace("#", "");
+        var initialModule = formSectionIds.indexOf(currentHash) !== -1 ? "form" : "structure";
+        select.value = initialModule;
+        applyModule(initialModule);
+    } else {
+        select.value = "css3";
+    }
 
     select.addEventListener("change", function () {
-        applyModule(select.value);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        var topic = select.value;
+
+        if (page === "html5") {
+            if (topic === "css3") {
+                window.location.href = "css3-fundamentals.html";
+                return;
+            }
+            applyModule(topic);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+
+        // On the CSS3 page: "structure"/"form" live on index.html, "css3" is already here
+        if (topic === "structure") {
+            window.location.href = "index.html";
+        } else if (topic === "form") {
+            window.location.href = "index.html#forms";
+        }
     });
 }
 
