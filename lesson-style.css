@@ -470,6 +470,20 @@ ol.takeaways li::before {
     min-height: 100px;
 }
 
+/* ---------- Try it Yourself: resizable result panel (drag to test breakpoints) ---------- */
+.tryit.resizable .tryit-frame {
+    resize: horizontal;
+    overflow: auto;
+    width: 100%;
+    min-width: 160px;
+    max-width: 100%;
+}
+.tryit.resizable .tryit-result-label::after {
+    content: " — drag the bottom-right corner to resize ↘";
+    text-transform: none;
+    letter-spacing: normal;
+}
+
 @media (max-width: 640px) {
     .tryit-body {
         flex-direction: column;

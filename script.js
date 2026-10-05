@@ -70,10 +70,21 @@ function initModuleSwitch() {
 
     var page = document.body.getAttribute("data-page") || "html5";
 
-    var formSectionIds = [
-        "w4-objectives", "forms", "input-types", "validation",
-        "form-elements", "multimedia", "accessibility", "w4-lab", "w4-takeaways"
-    ];
+    // Every topic in the site-wide dropdown: which page it lives on, the URL to
+    // reach it from elsewhere, and (for multi-module pages) the section ids whose
+    // presence in the URL hash means "start on this topic".
+    var topics = {
+        structure:  { page: "html5",     url: "index.html",
+            hashIds: [] },
+        form:       { page: "html5",     url: "index.html#forms",
+            hashIds: ["w4-objectives", "forms", "input-types", "validation", "form-elements", "multimedia", "accessibility", "w4-lab", "w4-takeaways"] },
+        css3:       { page: "css3",      url: "css3-fundamentals.html",
+            hashIds: [] },
+        layouts:    { page: "layouts",   url: "css3-layouts-responsive-design.html",
+            hashIds: [] },
+        responsive: { page: "layouts",   url: "css3-layouts-responsive-design.html#mobile-first",
+            hashIds: ["mobile-first", "fluid-layouts", "responsive-images", "media-queries", "bootstrap5", "lab2"] }
+    };
 
     function applyModule(module) {
         document.querySelectorAll("[data-module]").forEach(function (el) {
@@ -81,33 +92,29 @@ function initModuleSwitch() {
         });
     }
 
-    if (page === "html5") {
-        var currentHash = window.location.hash.replace("#", "");
-        var initialModule = formSectionIds.indexOf(currentHash) !== -1 ? "form" : "structure";
-        select.value = initialModule;
-        applyModule(initialModule);
-    } else {
-        select.value = "css3";
-    }
+    // Pick this page's default topic + figure out which topic the current hash implies
+    var defaultTopic = { html5: "structure", css3: "css3", layouts: "layouts" }[page];
+    var currentHash = window.location.hash.replace("#", "");
+    var initialTopic = defaultTopic;
+    Object.keys(topics).forEach(function (key) {
+        if (topics[key].page === page && topics[key].hashIds.indexOf(currentHash) !== -1) {
+            initialTopic = key;
+        }
+    });
+
+    select.value = initialTopic;
+    applyModule(initialTopic);
 
     select.addEventListener("change", function () {
-        var topic = select.value;
-
-        if (page === "html5") {
-            if (topic === "css3") {
-                window.location.href = "css3-fundamentals.html";
-                return;
-            }
-            applyModule(topic);
-            window.scrollTo({ top: 0, behavior: "smooth" });
+        var target = topics[select.value];
+        if (!target) {
             return;
         }
-
-        // On the CSS3 page: "structure"/"form" live on index.html, "css3" is already here
-        if (topic === "structure") {
-            window.location.href = "index.html";
-        } else if (topic === "form") {
-            window.location.href = "index.html#forms";
+        if (target.page === page) {
+            applyModule(select.value);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            window.location.href = target.url;
         }
     });
 }

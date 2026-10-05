@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Layouts &amp; Responsive Design</title>
+    <link rel="stylesheet" href="lesson-style.css">
+    <script src="script.js" defer></script>
+</head>
+<body data-page="layouts">
+
+    <header class="site-header">
+        <p class="eyebrow">Internet Programming and Web Development</p>
+        <h1>CSS3 Layouts &amp; Responsive Design</h1>
+        <p>Flexbox · Grid · Positioning · Variables · Transitions &amp; Animations · Mobile-First · Fluid Layouts · Responsive Images · Media Queries · Bootstrap 5</p>
+        <div class="module-switch">
+            <label for="module-select">View topic:</label>
+            <select id="module-select">
+                <option value="structure">Document Structure</option>
+                <option value="form">Form</option>
+                <option value="css3">CSS3 Fundamentals</option>
+                <option value="layouts">CSS3 Layouts</option>
+                <option value="responsive">Responsive Design</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============ LEARNING OBJECTIVES ============ -->
+        <section class="lesson" id="objectives">
+            <h2>Learning Objectives</h2>
+            <p class="subtitle">By the end of this module, you will be able to:</p>
+
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">LO1</span><span>Build layouts with Flexbox, correctly distinguishing container properties from item properties and the main axis from the cross axis.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO2</span><span>Build two-dimensional layouts with CSS Grid, including tracks, gap, the <code>fr</code> unit, and named template areas.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO3</span><span>Choose the appropriate CSS <code>position</code> value — static, relative, absolute, fixed, or sticky — for a given interface requirement.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO4</span><span>Define and reuse CSS custom properties (variables) for theming and maintainable stylesheets.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO5</span><span>Animate UI state changes with transitions and build custom motion sequences with <code>@keyframes</code>.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO6</span><span>Explain and apply the mobile-first responsive design philosophy, contrasting it with a desktop-first approach.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO7</span><span>Build fluid layouts that adapt smoothly across viewport sizes using relative units and modern sizing functions.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO8</span><span>Serve responsive images using <code>srcset</code>/<code>sizes</code>, the <code>&lt;picture&gt;</code> element, and <code>object-fit</code>.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO9</span><span>Write media queries that adapt layout and typography at defined breakpoints.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO10</span><span>Use Bootstrap 5's grid system, common components, and utility classes to scaffold a responsive page quickly.</span></div>
+                <div class="lo-item"><span class="lo-badge">LO11</span><span>Integrate Flexbox, Grid, positioning, variables, transitions, and responsive techniques into a single, fully responsive, animated multi-section web page.</span></div>
+            </div>
+
+            <p class="subtitle" style="margin-top:16px;">Aligned to: CO2 &mdash; Design and develop well-structured, standards-compliant web pages using HTML5 and CSS3. &nbsp;·&nbsp; CO5 &mdash; Build responsive, accessible user interfaces that adapt across devices and screen sizes. Builds directly on CSS3 Fundamentals (selectors, cascade, box model, color, typography).</p>
+        </section>
+
+        <div class="week-divider" data-module="layouts">
+            <h2>Part A · CSS3 Layouts</h2>
+            <p>Flexbox, Grid, Positioning, Variables, Transitions &amp; Animations</p>
+        </div>
+
+        <!-- ============ FLEXBOX ============ -->
+        <section class="lesson" id="flexbox" data-module="layouts">
+            <h2>2.1 Flexbox</h2>
+            <p class="subtitle">A one-dimensional layout system — arranges items along a single row or column. The go-to tool for laying out the contents of a component: a navbar, a row of cards, a set of buttons, or centering content.</p>
+
+            <h3>Container properties</h3>
+            <p>Turning on Flexbox is a single declaration on the parent element; every property below is then set on that same parent to control how its children are arranged.</p>
+
+            <table class="ref">
+                <tr><th><code>flex-direction</code></th><td>Which axis is the main axis — <code>row</code> (default), <code>column</code></td></tr>
+                <tr><th><code>justify-content</code></th><td>Alignment along the main axis — <code>flex-start</code>, <code>center</code>, <code>space-between</code>, <code>space-around</code>, <code>space-evenly</code></td></tr>
+                <tr><th><code>align-items</code></th><td>Alignment along the cross axis — <code>stretch</code> (default), <code>center</code>, <code>flex-start</code>, <code>flex-end</code></td></tr>
+                <tr><th><code>flex-wrap</code></th><td>Whether items wrap onto new lines — <code>nowrap</code> (default), <code>wrap</code></td></tr>
+                <tr><th><code>gap</code></th><td>Space between items, e.g. <code>1rem</code></td></tr>
+            </table>
+
+            <h3>Item properties</h3>
+            <p>These are set on the flex items (the children) rather than the container.</p>
+
+            <table class="ref">
+                <tr><th><code>flex-grow</code></th><td>Grows to fill free space, e.g. <code>1</code></td></tr>
+                <tr><th><code>flex-shrink</code></th><td>Shrinks when space is tight, e.g. <code>1</code></td></tr>
+                <tr><th><code>flex-basis</code></th><td>Starting size before grow/shrink, e.g. <code>200px</code></td></tr>
+                <tr><th><code>align-self</code></th><td>Overrides <code>align-items</code>, this item only</td></tr>
+                <tr><th><code>order</code></th><td>Visual reorder, no HTML change</td></tr>
+            </table>
+
+            <div class="tryit tall">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .flex-row {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: #eef2f7;
+    border-radius: 8px;
+  }
+  .flex-row.centered {
+    justify-content: center;
+    align-items: center;
+    height: 140px;
+  }
+  .chip {
+    background: #2c5f9b;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font: 14px sans-serif;
+  }
+  .grow { flex-grow: 1; }
+</style>
+
+<p style="font:12px sans-serif; color:#5c6b7a;">flex-direction: row, gap, and flex-grow on one item</p>
+<div class="flex-row">
+  <div class="chip grow">flex-grow: 1</div>
+  <div class="chip">fixed size</div>
+  <div class="chip">fixed size</div>
+</div>
+
+<p style="font:12px sans-serif; color:#5c6b7a; margin-top:16px;">The centering trick: justify-content + align-items: center</p>
+<div class="flex-row centered">
+  <div class="chip">Centered both ways</div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <strong>The Flexbox centering trick:</strong> <code>display: flex; justify-content: center; align-items: center;</code> on a container is the standard, reliable way to center a single child both horizontally and vertically — one of the most common Flexbox use cases in real projects.
+            </div>
+        </section>
+
+        <!-- ============ CSS GRID ============ -->
+        <section class="lesson" id="grid" data-module="layouts">
+            <h2>2.2 CSS Grid</h2>
+            <p class="subtitle">A two-dimensional layout system — lays items out along rows and columns at the same time. The natural choice for page-level and section-level layout, while Flexbox remains the natural choice for arranging items within a single component.</p>
+
+            <h3>Defining tracks</h3>
+            <pre>.page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5rem;                            /* row + column gap */
+}</pre>
+            <p>The <code>fr</code> unit represents a fraction of the remaining free space in the grid container — trivial to write flexible, equal-width (or proportionally weighted) columns. <code>minmax(150px, 1fr)</code> lets a track grow but never shrink below a floor size — a common technique for responsive card grids without a single media query.</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Grid Tracks</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .grid-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .grid-demo div {
+    background: #2c5f9b;
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+    border-radius: 6px;
+    font: 13px sans-serif;
+  }
+</style>
+<div class="grid-demo">
+  <div>1</div><div>2</div><div>3</div>
+  <div>4</div><div>5</div><div>6</div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Placing items with named areas</h3>
+            <p>Instead of positioning items by row/column line numbers, a grid can be given named regions on the container, and each child is simply assigned to a region name — a visual, ASCII-art-like syntax that makes the overall page structure easy to read directly from the CSS.</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Named Grid Areas</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "header header"
+      "nav    main"
+      "footer footer";
+    gap: 8px;
+  }
+  .page > * { padding: 14px; border-radius: 6px; color: #fff; font: 13px sans-serif; }
+  .h { grid-area: header; background: #1b2a41; }
+  .n { grid-area: nav; background: #2c5f9b; }
+  .m { grid-area: main; background: #6f8fb3; }
+  .f { grid-area: footer; background: #1b2a41; }
+</style>
+<div class="page">
+  <div class="h">header</div>
+  <div class="n">nav</div>
+  <div class="m">main { grid-area: main; }</div>
+  <div class="f">footer</div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Flexbox vs. Grid — choosing the right tool</h3>
+            <table class="ref">
+                <tr><th>Use Flexbox when…</th><td>Arranging items along one axis — a navbar, a button group, a card's internal content</td></tr>
+                <tr><th>Use Grid when…</th><td>Laying out an entire page or section in two dimensions — header/sidebar/main/footer</td></tr>
+            </table>
+            <p class="subtitle">In practice, most real pages use both together: Grid for the overall page skeleton, and Flexbox inside individual components placed within that grid.</p>
+        </section>
+
+        <!-- ============ POSITIONING ============ -->
+        <section class="lesson" id="positioning" data-module="layouts">
+            <h2>2.3 Positioning</h2>
+            <p class="subtitle">The <code>position</code> property controls how an element is placed relative to the normal document flow, its ancestors, or the viewport.</p>
+
+            <table class="ref">
+                <tr><th><code>static</code> <span style="font-weight:400;">(default)</span></th><td>Normal document flow; <code>top</code>/<code>right</code>/<code>bottom</code>/<code>left</code> and <code>z-index</code> have no effect.</td></tr>
+                <tr><th><code>relative</code></th><td>Stays in normal flow, but can be nudged with <code>top</code>/<code>left</code>/etc. relative to its own default position. Also establishes a positioning context for any absolutely positioned descendants.</td></tr>
+                <tr><th><code>absolute</code></th><td>Removed from normal flow entirely; positioned relative to its nearest positioned ancestor (any ancestor with <code>position</code> other than static), or the viewport if none exists.</td></tr>
+                <tr><th><code>fixed</code></th><td>Removed from normal flow; positioned relative to the viewport and stays in place even while the page scrolls.</td></tr>
+                <tr><th><code>sticky</code></th><td>A hybrid: behaves like <code>relative</code> until the element crosses a defined scroll threshold, then behaves like <code>fixed</code> — the classic technique behind sticky headers and navigation bars.</td></tr>
+            </table>
+
+            <div class="tryit tall">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .stage { position: relative; height: 140px; background: #eef2f7; border-radius: 8px; }
+  .badge { position: absolute; top: 8px; right: 8px; background: #e8622c; color: #fff; padding: 4px 10px; border-radius: 12px; font: 12px sans-serif; }
+  .sticky-bar { position: sticky; top: 0; background: #1b2a41; color: #fff; padding: 8px; text-align: center; font: 12px sans-serif; }
+  .scroll-area { height: 140px; overflow-y: auto; border: 1px solid #dde3ea; border-radius: 8px; margin-top: 14px; }
+  .filler { padding: 20px; font: 13px sans-serif; }
+</style>
+
+<div class="stage">
+  <div class="badge">position: absolute</div>
+  <p style="padding:16px; font:13px sans-serif;">Relative-positioned stage &mdash; badge pinned top-right</p>
+</div>
+
+<p style="font:12px sans-serif; color:#5c6b7a; margin-top:14px;">Scroll inside the box below &mdash; the header sticks</p>
+<div class="scroll-area">
+  <div class="sticky-bar">position: sticky</div>
+  <div class="filler">Content line 1</div>
+  <div class="filler">Content line 2</div>
+  <div class="filler">Content line 3</div>
+  <div class="filler">Content line 4</div>
+  <div class="filler">Content line 5</div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                <code>z-index</code> controls stacking order among positioned elements that overlap — a higher <code>z-index</code> renders on top of a lower one. It only has an effect on elements whose <code>position</code> is not <code>static</code>, and only compares elements within the same stacking context.
+            </div>
+        </section>
+
+        <!-- ============ CSS VARIABLES ============ -->
+        <section class="lesson" id="css-variables" data-module="layouts">
+            <h2>2.4 CSS Variables (Custom Properties)</h2>
+            <p class="subtitle">Let a value be defined once and reused throughout a stylesheet. Declared with a double-hyphen prefix, typically on <code>:root</code> so they're available globally.</p>
+
+            <pre>:root {
+  --primary-color: #1572B6;
+  --text-color: #0A1B2E;
+  --spacing-md: 1rem;
+  --radius: 8px;
+}
+
+.card {
+  color: var(--text-color);
+  border-radius: var(--radius, 4px); /* 4px fallback if undefined */
+  padding: var(--spacing-md);
+}</pre>
+
+            <p>Unlike Sass or LESS variables, CSS custom properties are a genuine part of the CSS language: resolved live in the browser, readable/updatable from JavaScript, and can be re-declared at a narrower scope — inside a class, a component, or a media query — to override the global value only where needed. This makes them the standard technique for theming, including light/dark mode.</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Theming with Variables</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  :root {
+    --primary-color: #1572B6;
+    --text-color: #0A1B2E;
+    --radius: 8px;
+  }
+  .card {
+    color: var(--text-color);
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--radius);
+    padding: 14px;
+    font: 14px sans-serif;
+  }
+  .dark-wrap {
+    --primary-color: #66c0ff;
+    --text-color: #E7F1FB;
+    background: #0A1B2E;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="card">Light theme card &mdash; uses the global --primary-color / --text-color</div>
+
+<div class="dark-wrap">
+  <div class="card">Dark theme card &mdash; same CSS class, variables re-declared for this scope</div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ TRANSITIONS & ANIMATIONS ============ -->
+        <section class="lesson" id="transitions-animations" data-module="layouts">
+            <h2>2.5 CSS Transitions and Animations</h2>
+            <p class="subtitle"><code>transition</code> animates a property smoothly between two values whenever that value changes — most commonly on <code>:hover</code> or <code>:focus</code>. <code>@keyframes</code> go further: a multi-step sequence that can run independently of user interaction, loop, and reverse.</p>
+
+            <div class="tryit compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Transition + Keyframe Animation</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .btn-demo {
+    background: #2c5f9b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font: 14px sans-serif;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out, transform 0.2s;
+  }
+  .btn-demo:hover {
+    background: #e8622c;
+    transform: translateY(-3px);
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-demo {
+    animation: fadeSlideIn 1.2s ease-out both;
+    background: #eef2f7;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font: 14px sans-serif;
+  }
+</style>
+
+<button class="btn-demo">Hover me (transition)</button>
+
+<div class="hero-demo">This fades &amp; slides in on load, via @keyframes &mdash; click Run again to replay it</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 A <code>transition</code> declaration needs, at minimum, a property to animate and a duration. Use <code>transition</code> for a simple state-to-state change (hover, focus, open/closed); use <code>@keyframes</code>/<code>animation</code> when the motion needs multiple steps, needs to run on page load, or needs to loop.
+            </div>
+        </section>
+
+        <!-- ============ LAB 1 ============ -->
+        <section class="lesson" id="lab1" data-module="layouts">
+            <h2>Laboratory Activity 1</h2>
+            <p class="subtitle">Responsive Landing Page: Layout &amp; Motion &nbsp;·&nbsp; index.html + styles.css &nbsp;·&nbsp; 20 points</p>
+
+            <div class="callout key">
+                🖥️ <strong>Task:</strong> Build a single-page site section — a sticky navigation bar, a hero area, and a row of feature cards — using only hand-written, custom CSS.
+            </div>
+
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Use CSS Grid for the overall page-section layout (hero region, feature-card region, footer)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Use Flexbox to arrange items inside the navbar and inside the row of feature cards</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Implement a sticky header using <code>position: sticky</code></span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Define a color palette and spacing scale as CSS custom properties on <code>:root</code>, use <code>var()</code> throughout</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Apply a hover transition to at least the buttons and feature cards</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Add at least one <code>@keyframes</code> animation — e.g. a fade/slide-in on the hero content</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Write semantic HTML5 (<code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>footer</code>) with no inline styles</span></div>
+            </div>
+
+            <table class="ref rubric" style="margin-top:20px;">
+                <tr><th>5 pts</th><td>Grid / Flexbox layout — correct, purposeful use of Grid for section layout and Flexbox for component-level arrangement</td></tr>
+                <tr><th>3 pts</th><td>Positioning / sticky nav — header correctly implemented, behaves as expected while scrolling</td></tr>
+                <tr><th>3 pts</th><td>CSS variables — palette and spacing scale defined as custom properties, reused via <code>var()</code></td></tr>
+                <tr><th>3 pts</th><td>Transitions — smooth, appropriately-timed hover transitions on interactive elements</td></tr>
+                <tr><th>3 pts</th><td>Keyframe animation — at least one working <code>@keyframes</code> animation, sensibly applied</td></tr>
+                <tr><th>3 pts</th><td>Code quality / semantics — semantic HTML5, readable and organized CSS, no inline styles</td></tr>
+            </table>
+
+            <div class="callout tip">
+                💡 Submit <code>index.html</code> and <code>styles.css</code> &nbsp;·&nbsp; Keep a working copy of both — this is the starting point for Lab 2 &nbsp;·&nbsp; <strong>Total: 20 points</strong>
+            </div>
+        </section>
+
+        <div class="week-divider" data-module="responsive">
+            <h2>Part B · Responsive Web Design</h2>
+            <p>Mobile-First, Fluid Layouts, Responsive Images, Media Queries, Bootstrap 5</p>
+        </div>
+
+        <!-- ============ MOBILE-FIRST ============ -->
+        <section class="lesson" id="mobile-first" data-module="responsive">
+            <h2>2.6 Mobile-First Approach</h2>
+            <p class="subtitle">Write the base CSS for the smallest, simplest screen first, then progressively layer on enhancements for larger screens using <code>min-width</code> media queries.</p>
+
+            <div class="tryit resizable">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself »</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  /* base styles = mobile styles, no media query needed */
+  .cards-demo { display: flex; flex-direction: column; gap: 8px; }
+
+  @media (min-width: 420px) {
+    .cards-demo { flex-direction: row; }
+  }
+  .cards-demo div { background: #2c5f9b; color: #fff; padding: 14px; border-radius: 6px; flex: 1; font: 13px sans-serif; text-align: center; }
+</style>
+
+<p style="font:12px sans-serif; color:#5c6b7a;">Drag the Result panel's bottom-right corner narrower/wider &mdash; watch it switch between stacked (mobile) and side-by-side (&ge;420px) layouts</p>
+<div class="cards-demo">
+  <div>Card 1</div>
+  <div>Card 2</div>
+  <div>Card 3</div>
+</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                Mobile-first is the inverse of a <strong>desktop-first</strong> approach (which starts from a full desktop layout and uses <code>max-width</code> queries to strip features away). Mobile-first is generally preferred: it forces prioritizing essential content, and typically produces leaner CSS since base styles are simple and only larger screens receive overrides.
+            </div>
+        </section>
+
+        <!-- ============ FLUID LAYOUTS ============ -->
+        <section class="lesson" id="fluid-layouts" data-module="responsive">
+            <h2>2.7 Fluid Layouts</h2>
+            <p class="subtitle">Avoid fixed pixel widths for major containers — size them with percentages, <code>max-width</code>, and modern CSS functions so the layout reflows naturally.</p>
+
+            <pre>.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}</pre>
+
+            <div class="tryit resizable compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » clamp() in Action</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .fluid-box {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: clamp(0.5rem, 4vw, 2rem);
+    background: #eef2f7;
+    border-radius: 8px;
+    font-size: clamp(0.85rem, 2vw, 1.3rem);
+    text-align: center;
+  }
+</style>
+<p style="font:12px sans-serif; color:#5c6b7a;">Drag the Result panel narrower/wider &mdash; padding and font-size scale smoothly</p>
+<div class="fluid-box">clamp(min, preferred, max) scales with the viewport</div></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout tip">
+                💡 <code>clamp(min, preferred, max)</code> is especially useful for fluid typography and spacing — a value scales smoothly with the viewport while guaranteeing it never becomes unreadably small or excessively large. Combined with Flexbox or Grid, most of a layout adapts automatically, and media queries are reserved for genuine structural changes.
+            </div>
+        </section>
+
+        <!-- ============ RESPONSIVE IMAGES ============ -->
+        <section class="lesson" id="responsive-images" data-module="responsive">
+            <h2>2.8 Responsive Images</h2>
+            <p class="subtitle">The baseline rule for any image in a fluid layout: prevent it from overflowing its container.</p>
+
+            <pre>img {
+  max-width: 100%;
+  height: auto;
+}</pre>
+
+            <h3><code>srcset</code> and <code>sizes</code></h3>
+            <p><code>srcset</code> lets the browser choose the best-resolution image file for the user's screen size and pixel density; <code>sizes</code> tells the browser how wide the image will actually be displayed at different viewport widths.</p>
+
+            <div class="tryit resizable compact">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it » Responsive Image</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
+</style>
+<img
+  src="https://picsum.photos/seed/css3/900/300"
+  srcset="https://picsum.photos/seed/css3/400/140 400w, https://picsum.photos/seed/css3/900/300 900w"
+  sizes="100vw"
+  alt="Responsive demo photo">
+<p style="font:12px sans-serif; color:#5c6b7a; margin-top:8px;">Drag the Result panel narrower &mdash; the image never overflows its container</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <h3>The <code>&lt;picture&gt;</code> element and <code>object-fit</code></h3>
+            <p><code>&lt;picture&gt;</code> goes further than <code>srcset</code>: it can swap in an entirely different image file for art direction (a tighter crop on mobile) or serve a modern format like WebP with a fallback.</p>
+            <pre>&lt;picture&gt;
+  &lt;source media="(min-width: 768px)" srcset="hero-wide.webp"&gt;
+  &lt;source srcset="hero-tall.webp"&gt;
+  &lt;img src="hero-tall.jpg" alt="Product hero shot"&gt;
+&lt;/picture&gt;</pre>
+            <div class="callout">
+                <code>object-fit</code> controls how an image fills a box whose dimensions are fixed independently of the image's own aspect ratio — <code>object-fit: cover</code> crops the image to fill the box, while <code>object-fit: contain</code> scales it down to fit entirely within the box without cropping.
+            </div>
+        </section>
+
+        <!-- ============ MEDIA QUERIES ============ -->
+        <section class="lesson" id="media-queries" data-module="responsive">
+            <h2>2.9 Media Queries</h2>
+            <p class="subtitle">A media query applies a block of CSS only when a condition about the viewport (or device) is true.</p>
+
+            <pre>@media (min-width: 768px) {
+  .sidebar { display: block; }
+}</pre>
+
+            <p>While not a strict standard, most teams converge on a similar set of reference breakpoints:</p>
+            <table class="ref">
+                <tr><th>sm</th><td>&ge; 576px — Large phones (landscape)</td></tr>
+                <tr><th>md</th><td>&ge; 768px — Tablets</td></tr>
+                <tr><th>lg</th><td>&ge; 992px — Small laptops</td></tr>
+                <tr><th>xl</th><td>&ge; 1200px — Desktops and large monitors</td></tr>
+            </table>
+
+            <div class="tryit resizable">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself » Breakpoints</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><style>
+  .status { padding: 16px; border-radius: 8px; text-align: center; font: bold 14px sans-serif; color: #fff; background: #999; }
+  .status::before { content: "< 576px (base / sm)"; }
+
+  @media (min-width: 576px) {
+    .status { background: #2c5f9b; }
+    .status::before { content: "\2265 576px (sm)"; }
+  }
+  @media (min-width: 768px) {
+    .status { background: #1572B6; }
+    .status::before { content: "\2265 768px (md)"; }
+  }
+  @media (min-width: 992px) {
+    .status { background: #e8622c; }
+    .status::before { content: "\2265 992px (lg)"; }
+  }
+</style>
+<div class="status"></div>
+<p style="font:12px sans-serif; color:#5c6b7a; margin-top:10px;">Drag the Result panel and watch the label + color change at each breakpoint</p></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout">
+                Media queries can also test features beyond width, such as <code>orientation: landscape/portrait</code> or <code>prefers-color-scheme: dark</code>, which lets a stylesheet automatically respect the user's system-level dark-mode preference.
+            </div>
+        </section>
+
+        <!-- ============ BOOTSTRAP 5 ============ -->
+        <section class="lesson" id="bootstrap5" data-module="responsive">
+            <h2>2.10 Introduction to Bootstrap 5</h2>
+            <p class="subtitle">A free, open-source CSS framework: a responsive grid system, prebuilt components, and utility classes — assemble a consistent, responsive interface quickly without writing custom CSS from scratch.</p>
+
+            <pre>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</pre>
+
+            <h3>The grid system</h3>
+            <p>Bootstrap's grid follows a consistent <strong>container → row → column</strong> nesting pattern, built on a 12-column system. <code>.container</code> centers content with a responsive max-width, while <code>.container-fluid</code> spans the full viewport width. Responsive column classes like <code>col-md-6</code> change a column's width at each breakpoint — e.g. stacking full-width on mobile, side-by-side from <code>md</code> up — without a single custom media query.</p>
+
+            <h3>Components &amp; utility classes</h3>
+            <table class="ref">
+                <tr><th>Spacing</th><td><code>m-3</code>, <code>p-2</code>, <code>mt-4</code>, <code>px-5</code> — margin/padding scale, 0–5</td></tr>
+                <tr><th>Flex utilities</th><td><code>d-flex</code>, <code>justify-content-center</code> — quick Flexbox layout without custom CSS</td></tr>
+                <tr><th>Text</th><td><code>text-center</code>, <code>fw-bold</code>, <code>text-muted</code> — alignment and typography tweaks</td></tr>
+                <tr><th>Responsive display</th><td><code>d-none d-md-block</code> — hidden by default; shown from the <code>md</code> breakpoint up</td></tr>
+            </table>
+
+            <div class="tryit">
+                <div class="tryit-toolbar">
+                    <span class="tryit-title">Try it Yourself » Bootstrap Grid + Card</span>
+                    <div class="tryit-buttons">
+                        <button type="button" class="tryit-run">Run ▶</button>
+                        <button type="button" class="tryit-reset">Reset</button>
+                    </div>
+                </div>
+                <div class="tryit-body">
+                    <textarea class="tryit-code" spellcheck="false"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container-fluid">
+  <div class="row g-2">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Bootstrap's Card + Grid, loaded straight from the CDN.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <span class="badge text-bg-secondary p-3">d-flex + justify-content-center utilities</span>
+    </div>
+  </div>
+</div>
+<!-- Note: bootstrap.bundle.min.js (dropdowns, modals) needs scripting,
+     which this sandboxed preview disables. CSS-only components like
+     Card, Grid, and Button work exactly as shown. --></textarea>
+                    <div class="tryit-result">
+                        <div class="tryit-result-label">Result</div>
+                        <iframe class="tryit-frame" title="Live result"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout key">
+                <strong>Framework vs. hand-rolled CSS:</strong> Bootstrap trades some fine-grained design control and a larger CSS payload for speed, consistency, and built-in accessibility and responsiveness. Excellent for prototypes, internal tools, and tight timelines; a custom design system is usually better when a highly distinctive visual identity or a minimal file size is the priority.
+            </div>
+        </section>
+
+        <!-- ============ LAB 2 ============ -->
+        <section class="lesson" id="lab2" data-module="responsive">
+            <h2>Laboratory Activity 2</h2>
+            <p class="subtitle">Make It Responsive, Then Rebuild in Bootstrap 5 &nbsp;·&nbsp; 20 points</p>
+
+            <div class="callout key">
+                🖥️ <strong>Task:</strong> Directly extends Lab 1's page. Two parts, designed to let you directly compare a hand-rolled responsive approach against a framework-based one.
+            </div>
+
+            <h3>Part 1 — Add a mobile-first stylesheet</h3>
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Starting from Lab 1's page, write the base (unqueried) CSS to look correct on a small mobile screen first</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Add <code>min-width</code> media queries at, at minimum, the <code>md</code> and <code>lg</code> breakpoints to adapt the grid and navbar layout</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Make the hero image responsive using the <code>srcset</code> attribute (and <code>sizes</code>, if multiple widths are provided)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Verify the page using DevTools' device toolbar across at least three screen widths (e.g. 375px, 768px, 1280px)</span></div>
+            </div>
+
+            <h3>Part 2 — Rebuild in Bootstrap 5</h3>
+            <div class="lo-list">
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Recreate the same page structure (navbar, hero, feature cards, footer) using Bootstrap's container/row/col grid system</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Use Bootstrap components where appropriate — at minimum, Navbar and Card</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Use Bootstrap utility classes for spacing, text alignment, and at least one responsive-display class (e.g. <code>d-none d-md-block</code>)</span></div>
+                <div class="lo-item"><span class="lo-badge">✓</span><span>Add a short written comparison (3–5 sentences) reflecting on the trade-offs between the hand-rolled version and the Bootstrap version</span></div>
+            </div>
+
+            <table class="ref rubric" style="margin-top:20px;">
+                <tr><th>5 pts</th><td>Mobile-first structure &amp; breakpoints — base styles are genuinely mobile-first; breakpoints use <code>min-width</code> and are applied sensibly</td></tr>
+                <tr><th>3 pts</th><td>Responsive images — <code>srcset</code> (and <code>sizes</code>, if applicable) implemented correctly</td></tr>
+                <tr><th>4 pts</th><td>Bootstrap grid usage — correct container/row/col structure and responsive column classes</td></tr>
+                <tr><th>4 pts</th><td>Bootstrap components — at least a Navbar and Card component used correctly</td></tr>
+                <tr><th>2 pts</th><td>Utility classes — purposeful use of spacing, text, and responsive-display utilities</td></tr>
+                <tr><th>2 pts</th><td>Comparison reflection — thoughtful, specific reflection on custom CSS vs. Bootstrap trade-offs</td></tr>
+            </table>
+
+            <div class="callout tip">
+                💡 Submit <code>responsive-custom.html</code> + <code>responsive-custom.css</code> (Part 1) plus <code>responsive-bootstrap.html</code> (Part 2) &nbsp;·&nbsp; <strong>Total: 20 points</strong>
+            </div>
+        </section>
+
+        <!-- ============ QUIZ ============ -->
+        <section class="lesson" id="quiz">
+            <h2>Formative Assessment</h2>
+            <p class="subtitle">14 quick recall &amp; application questions covering both parts of this module</p>
+
+            <ol class="takeaways">
+                <li>Which <code>display</code> value creates a one-dimensional Flexbox layout?</li>
+                <li>Which Flexbox container property controls alignment along the cross axis?</li>
+                <li>Which CSS Grid unit represents a fraction of the remaining free space in the grid?</li>
+                <li>Which property defines named layout regions in a Grid container?</li>
+                <li>Which <code>position</code> value removes an element from normal flow but keeps it fixed relative to the viewport even while scrolling?</li>
+                <li>Which <code>position</code> value behaves like <code>relative</code> until a scroll threshold is reached, then like <code>fixed</code>?</li>
+                <li>How is a global CSS custom property declared?</li>
+                <li>Which function reads a CSS variable, with an optional fallback value?</li>
+                <li>Which at-rule defines an animation's keyframe steps?</li>
+                <li>Name the two parts every <code>transition</code> declaration must include, at minimum.</li>
+                <li>True or False: mobile-first CSS primarily relies on <code>max-width</code> media queries.</li>
+                <li>Which HTML attribute lets the browser automatically choose the best image resolution for the viewport?</li>
+                <li>Which Bootstrap 5 class, applied to a column's parent, creates a responsive 12-column grid layout?</li>
+                <li>Which Bootstrap utility hides an element by default but displays it from the <code>md</code> breakpoint upward?</li>
+            </ol>
+
+            <details style="margin-top:16px;">
+                <summary style="cursor:pointer; font-weight:700; color:var(--blue);">Show Answer Key</summary>
+                <ol class="takeaways" style="margin-top:14px;">
+                    <li><code>display: flex;</code></li>
+                    <li><code>align-items</code></li>
+                    <li>The <code>fr</code> unit</li>
+                    <li><code>grid-template-areas</code></li>
+                    <li><code>position: fixed;</code></li>
+                    <li><code>position: sticky;</code></li>
+                    <li>By defining <code>--name: value;</code> inside a <code>:root</code> rule</li>
+                    <li><code>var(--name, fallback)</code></li>
+                    <li><code>@keyframes</code></li>
+                    <li>A property to animate and a duration</li>
+                    <li>False — mobile-first primarily uses <code>min-width</code> media queries</li>
+                    <li><code>srcset</code></li>
+                    <li><code>row</code> (combined with <code>col-*</code> classes on its children)</li>
+                    <li><code>d-none d-md-block</code></li>
+                </ol>
+            </details>
+        </section>
+
+        <!-- ============ KEY TAKEAWAYS ============ -->
+        <section class="lesson" id="takeaways">
+            <h2>Key Takeaways</h2>
+            <p class="subtitle">CSS3 Layouts &amp; Responsive Design: Flexbox · Grid · Positioning · Variables · Transitions &amp; Animations · Mobile-First · Fluid Layouts · Responsive Images · Media Queries · Bootstrap 5</p>
+
+            <ol class="takeaways">
+                <li>Flexbox handles one-dimensional, component-level layout; CSS Grid handles two-dimensional, page-level layout — most real interfaces use both together.</li>
+                <li>Positioning (static, relative, absolute, fixed, sticky) gives fine-grained control for sticky headers, fixed UI elements, and precisely placed overlays or badges.</li>
+                <li>CSS custom properties centralize a design's colors, spacing, and other repeated values, making large stylesheets far easier to maintain and theme.</li>
+                <li>Transitions and keyframe animations add polish and communicate state changes clearly to users, without requiring JavaScript for simple cases.</li>
+                <li>Mobile-first design, fluid layouts, responsive images, and media queries combine to produce a page that works well on any device, from a small phone to a large desktop monitor.</li>
+                <li>Bootstrap 5 trades a degree of fine-grained design control for speed and consistency — a strong choice for prototypes and time-boxed projects, while a hand-rolled system offers more control over a unique visual identity.</li>
+                <li>Together, this module completes the core front-end layout toolkit and sets up the next lesson's introduction to JavaScript, which adds interactivity on top of these layouts.</li>
+            </ol>
+        </section>
+
+        <!-- ============ REFERENCES ============ -->
+        <section class="lesson" id="references">
+            <h2>References</h2>
+            <p class="subtitle">Course resources for this topic</p>
+
+            <table class="ref">
+                <tr><th>MDN Web Docs</th><td>CSS Flexible Box Layout, CSS Grid Layout, CSS positioned layout, CSS custom properties — <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener">developer.mozilla.org/en-US/docs/Web/CSS</a></td></tr>
+                <tr><th>CSS-Tricks</th><td>A Complete Guide to Flexbox / A Complete Guide to Grid — <a href="https://css-tricks.com" target="_blank" rel="noopener">css-tricks.com</a></td></tr>
+                <tr><th>Bootstrap</th><td>Bootstrap 5 Documentation — <a href="https://getbootstrap.com/docs" target="_blank" rel="noopener">getbootstrap.com/docs</a></td></tr>
+                <tr><th>Duckett, J. (2014)</th><td><em>HTML &amp; CSS: Design and Build Websites.</em> Wiley.</td></tr>
+                <tr><th>Freeman &amp; Robson (2020)</th><td><em>Head First HTML and CSS</em> (2nd ed.). O'Reilly.</td></tr>
+                <tr><th>Robbins, J. N. (2018)</th><td><em>Learning Web Design</em> (5th ed.). O'Reilly.</td></tr>
+            </table>
+        </section>
+
+    </main>
+
+    <div class="next-week">
+        <p class="eyebrow">▶ Next</p>
+        <h3>JavaScript Fundamentals</h3>
+        <p>Adding interactivity on top of the layout &amp; responsive design toolkit</p>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Internet Programming and Web Development — CSS3 Layouts &amp; Responsive Design Lesson Site</p>
+    </footer>
+
+</body>
+</html>
