@@ -119,5 +119,30 @@ function initModuleSwitch() {
     });
 }
 
+function initAnswerKeyGate() {
+    var btn = document.getElementById("answer-key-btn");
+    var gate = document.getElementById("answer-key-gate");
+    var content = document.getElementById("answer-key-content");
+    if (!btn || !gate || !content) {
+        return;
+    }
+
+    var ANSWER_KEY_PASSWORD = "bingo";
+
+    btn.addEventListener("click", function () {
+        var entered = window.prompt("Enter the password to view the answer key:");
+        if (entered === null) {
+            return;
+        }
+        if (entered.trim().toLowerCase() === ANSWER_KEY_PASSWORD) {
+            gate.hidden = true;
+            content.hidden = false;
+        } else {
+            window.alert("Incorrect password.");
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", initTryItBoxes);
 document.addEventListener("DOMContentLoaded", initModuleSwitch);
+document.addEventListener("DOMContentLoaded", initAnswerKeyGate);

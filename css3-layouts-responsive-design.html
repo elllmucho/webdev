@@ -771,9 +771,12 @@
                 <li>Which Bootstrap utility hides an element by default but displays it from the <code>md</code> breakpoint upward?</li>
             </ol>
 
-            <details style="margin-top:16px;">
-                <summary style="cursor:pointer; font-weight:700; color:var(--blue);">Show Answer Key</summary>
-                <ol class="takeaways" style="margin-top:14px;">
+            <div id="answer-key-gate" style="margin-top:16px;">
+                <button type="button" id="answer-key-btn" class="tryit-run">🔒 Show Answer Key</button>
+                <p><small>Password required.</small></p>
+            </div>
+            <div id="answer-key-content" hidden style="margin-top:16px;">
+                <ol class="takeaways">
                     <li><code>display: flex;</code></li>
                     <li><code>align-items</code></li>
                     <li>The <code>fr</code> unit</li>
@@ -789,7 +792,7 @@
                     <li><code>row</code> (combined with <code>col-*</code> classes on its children)</li>
                     <li><code>d-none d-md-block</code></li>
                 </ol>
-            </details>
+            </div>
         </section>
 
         <!-- ============ KEY TAKEAWAYS ============ -->
